@@ -59,6 +59,9 @@
     - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
+    - lowpass:
+      cutoff: 8
+      order: 4
 
 # --- Hips ---
 
