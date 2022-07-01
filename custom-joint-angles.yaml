@@ -60,7 +60,7 @@
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
     - lowpass: $prev
-      cutoff: 8
+      cutoff: 2
       order: 4
 
 # --- Hips ---
