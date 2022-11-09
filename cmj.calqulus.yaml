@@ -48,7 +48,7 @@
 ## SERIES ##
 ############
 
-# Calculating joint angles
+# Calculating joint angles and positions
 
 # --- Pelvis ---
 
@@ -59,6 +59,13 @@
     - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
+  
+- parameter: Pelvis Positions
+  where:
+    name: '!Static*'
+  steps:
+    - segment: Hips 
+      space: VirtualLab
 
 # --- Hips ---
 
