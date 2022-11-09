@@ -197,48 +197,6 @@
 				]
 			},
 			{
-				"class": "base-section",
-				"editable": true,
-				"id": "upper-body-kinematics-wrist",
-				"title": "Wrist",
-				"children": [
-					{
-						"children": [
-							{
-								"id": "wrist-flexion-graph"
-							},
-							{
-								"id": "wrist-adduction-graph"
-							},
-							{
-								"id": "dummy"
-							}
-						]
-					}
-				]
-			},
-			{
-				"class": "base-section",
-				"editable": true,
-				"id": "upper-body-kinematics-head",
-				"title": "Head",
-				"children": [
-					{
-						"children": [
-							{
-								"id": "head-flexion-graph"
-							},
-							{
-								"id": "head-lateral-flexion-graph"
-							},
-							{
-								"id": "head-rotation-graph"
-							}
-						]
-					}
-				]
-			},
-			{
 				"class": "collapsable-tables",
 				"id": "upper-body-tables",
 				"editable": true,
