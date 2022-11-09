@@ -138,7 +138,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_X",
+				"y": "Pelvis Positions_X",
 				"title": "Pelvis X"
 			}
 		]
@@ -151,7 +151,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_Y",
+				"y": "Pelvis Positions_Y",
 				"title": "Pelvis Y"
 			}
 		]
@@ -164,7 +164,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_Z",
+				"y": "Pelvis Positions_Z",
 				"title": "Pelvis Z"
 			}
 		]
