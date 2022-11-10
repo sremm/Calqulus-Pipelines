@@ -60,7 +60,7 @@
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
   
-- parameter: Pelvis Positions
+- parameter: Pelvis_Position
   where:
     name: '!Static*'
   steps:
@@ -117,6 +117,38 @@
   steps:
     - angle: [RightLeg, RightFoot]
     - multiply: [$prev, [1, 1, -1]]
+
+# --- Foot ---
+- parameter: Left Toe Base_Position
+  set: left
+  where:
+    name: '!Static*'
+  steps:
+    - segment: LeftToeBase
+      space: VirtualLab
+
+- parameter: Right Toe Base_Position
+  set: right
+  where:
+    name: '!Static*'
+  steps:
+    - segment: RightToeBase
+      space: VirtualLab
+
+- parameter: Left Toe Base_Velocity
+  set: left
+  where:
+    name: '!Static*'
+  steps:
+    - velocity: Left Toe Base_Position
+  
+- parameter: Right Toe Base_Velocity
+  set: right
+  where:
+    name: '!Static*'
+  steps:
+    - velocity: Right Toe Base_Position
+      
 
 # --- Thorax ---
 
