@@ -47,6 +47,21 @@
 		}
 	},
 	{
+		"id": "timeseries-position",
+		"inherits": "base-timeseries",
+		"type": "timeseries",
+		"chartOptions": {
+			"yAxis": {
+				"title": "Position",
+				"unit": "mm"
+			},
+			"height": "56%",
+			"colorBy": "set",
+			"playheads": true,
+			"allowSetsToggle": true
+		}
+	},
+	{
 		"id": "collapsable-tables",
 		"type": "section",
 		"displayOptions": {
@@ -132,7 +147,7 @@
 	},
 	{
 		"id": "pelvic-x-graph",
-		"inherits": "base-timeseries",
+		"inherits": "timeseries-position",
 		"displayOptions": {
 			"title": "Pelvis X"
 		},
@@ -145,7 +160,7 @@
 	},
 	{
 		"id": "pelvic-y-graph",
-		"inherits": "base-timeseries",
+		"inherits": "timeseries-position",
 		"displayOptions": {
 			"title": "Pelvis Y"
 		},
@@ -158,7 +173,7 @@
 	},
 	{
 		"id": "pelvic-z-graph",
-		"inherits": "base-timeseries",
+		"inherits": "timeseries-position",
 		"displayOptions": {
 			"title": "Pelvis Z"
 		},
