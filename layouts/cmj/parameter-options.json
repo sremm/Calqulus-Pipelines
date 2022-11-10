@@ -153,7 +153,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis Positions_X",
+				"y": "Pelvis_Position_X",
 				"title": "Pelvis X"
 			}
 		]
@@ -166,7 +166,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis Positions_Y",
+				"y": "Pelvis_Position_Y",
 				"title": "Pelvis Y"
 			}
 		]
@@ -179,7 +179,7 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis Positions_Z",
+				"y": "Pelvis_Position_Z",
 				"title": "Pelvis Z"
 			}
 		]
@@ -317,6 +317,108 @@
 			{
 				"y": "Right Ankle Angles_Y",
 				"title": "Right Ankle Inversion"
+			}
+		]
+	},
+	{
+		"id": "toe-base-x-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base X"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Position_X",
+				"title": "Left Toe Base Position"
+			},
+			{
+				"y": "Right Toe Base_Position_X",
+				"title": "Right Toe Base Position"
+			}
+		]
+	},
+	{
+		"id": "toe-base-y-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base Y"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Position_Y",
+				"title": "Left Toe Base Position"
+			},
+			{
+				"y": "Right Toe Base_Position_Y",
+				"title": "Right Toe Base Position"
+			}
+		]
+	},
+	{
+		"id": "toe-base-z-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base Z"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Position_Z",
+				"title": "Left Toe Base Position"
+			},
+			{
+				"y": "Right Toe Base_Position_Z",
+				"title": "Right Toe Base Position"
+			}
+		]
+	},
+	{
+		"id": "toe-base-vel-x-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base Velocity X"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Velocity_X",
+				"title": "Left Toe Base Velocity"
+			},
+			{
+				"y": "Right Toe Base_Velocity_X",
+				"title": "Right Toe Base Velocity"
+			}
+		]
+	},
+	{
+		"id": "toe-base-vel-y-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base Velocity Y"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Velocity_Y",
+				"title": "Left Toe Base Velocity"
+			},
+			{
+				"y": "Right Toe Base_Velocity_Y",
+				"title": "Right Toe Base Velocity"
+			}
+		]
+	},
+	{
+		"id": "toe-base-vel-z-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Toe Base Velocity Z"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Toe Base_Velocity_Z",
+				"title": "Left Toe Base Velocity"
+			},
+			{
+				"y": "Right Toe Base_Velocity_Z",
+				"title": "Right Toe Base Velocity"
 			}
 		]
 	},

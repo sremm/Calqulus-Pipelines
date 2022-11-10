@@ -111,6 +111,48 @@
 				]
 			},
 			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-position-toe-base",
+				"title": "Toe Base Position",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "toe-base-x-graph"
+							},
+							{
+								"id": "toe-base-y-graph"
+							},
+							{
+								"id": "toe-base-z-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-velocity-toe-base",
+				"title": "Toe Base Velocity",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "toe-base-vel-x-graph"
+							},
+							{
+								"id": "toe-base-vel-y-graph"
+							},
+							{
+								"id": "toe-base-vel-z-graph"
+							}
+						]
+					}
+				]
+			},
+			{
 				"class": "collapsable-tables",
 				"id": "lower-body-tables",
 				"editable": true,
