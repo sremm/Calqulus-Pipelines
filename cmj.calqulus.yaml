@@ -230,7 +230,7 @@
   where:
     name: '!Static*'
   steps:
-    - peakFinder: Left Toe Base_Velocity
+    - peakFinder: Left Toe Base_Velocity.z
       width: 3
       distance: 20
       height: 0.65
