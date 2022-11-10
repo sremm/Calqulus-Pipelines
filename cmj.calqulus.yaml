@@ -230,10 +230,13 @@
   where:
     name: '!Static*'
   steps:
-    - peakFinder: Left Toe Base_Velocity.z
-      width: 3
-      distance: 20
-      height: 0.65
+    - max: Left Toe Base_Velocity.z
+
+- event: Takeoff_right
+  where:
+    name: '!Static*'
+  steps:
+    - max: Right Toe Base_Velocity.z
 
 
 #############
