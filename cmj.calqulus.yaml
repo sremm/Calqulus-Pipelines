@@ -285,7 +285,24 @@
   #  - min: Pelvis_Velocity.z
   #    frames: true
 
-  
+- event: StartOfEccentric
+  where: 
+    name: '!Static*'
+  steps:
+   - import: Pelvis_Velocity.z => pelvis_vel
+   - threshold: Pelvis_Velocity.z
+     value: -100
+     direction: down
+   - min: $prev
+
+- event: StartOfConcentric
+  where: 
+    name: '!Static*'
+  steps:
+   - threshold: Pelvis_Velocity.z
+     direction: up
+     value: 0
+   - eventMask: [$prev, StartOfEccentric, Takeoff]
 
 #############
 ## Metrics ##
@@ -306,6 +323,14 @@
      from: mm
      to: cm
      
+- parameter: depth_of_movement
+  where: 
+    name: '!Static*'
+  steps:
+   - subtract: [Pelvis_Position.z@StartOfEccentric, Pelvis_Position.z@StartOfConcentric]
+   - convert: $prev
+     from: mm
+     to: cm
 
 # Find global maximum/minimum/range
 
