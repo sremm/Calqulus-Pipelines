@@ -67,6 +67,12 @@
     - segment: Hips 
       space: VirtualLab
 
+- parameter: Pelvis_Velocity
+  where:
+    name: '!Static*'
+  steps:
+    - velocity: Pelvis_Position
+
 # --- Hips ---
 
 - parameter: Left Hip Angles
@@ -229,19 +235,77 @@
 - event: Takeoff_left
   where:
     name: '!Static*'
+  set: left
   steps:
-    - max: Left Toe Base_Velocity.z
+    - threshold: Left Toe Base_Velocity.z
+      value: 200
+      direction: up
+      export: vel_over_thresh
+
+
+    # - eventMask: [Left Toe Base_Velocity.z, BOF, vel_over_thresh]
+    #   export: vel_cropped # output
+    # - threshold: vel_cropped 
+    #   value: 200
+    #   direction: up
+    # - peakFinder: Left Toe Base_Velocity.z
+    #   width: 6
+    #   distance: 100
+    #   height: 0.65
+
+
+    # - max: Left Toe Base_Velocity.z
+    #   frames: true
 
 - event: Takeoff_right
   where:
     name: '!Static*'
+  set: right
   steps:
-    - max: Right Toe Base_Velocity.z
+    - threshold: Right Toe Base_Velocity.z
+      value: 200
+      direction: up
+      export: vel_over_thresh
 
+- event: Takeoff
+  where: 
+    name: '!Static*'
+  steps:
+    - mean: [Takeoff_right, Takeoff_left]
+
+- event: Touchdown
+  where: 
+    name: '!Static*'
+  steps:
+   - negate: Pelvis_Velocity.z => pelvis_vel_inv
+   - peakFinder: pelvis_vel_inv
+     width: 6
+     distance: 100
+     height: 500
+  #  - min: Pelvis_Velocity.z
+  #    frames: true
+
+  
 
 #############
 ## Metrics ##
 #############
+
+# Some jump metrics
+
+- parameter: jump_height
+  where: 
+    name: '!Static*'
+  steps:
+   - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
+     output: pelvis_z_during_flight
+   - max: pelvis_z_during_flight => pelvis_max_during_flight
+   - import: Pelvis_Position.z@Takeoff => pelvis_at_takeoff
+   - subtract: [pelvis_max_during_flight, pelvis_at_takeoff]
+   - convert: $prev
+     from: mm
+     to: cm
+     
 
 # Find global maximum/minimum/range
 
