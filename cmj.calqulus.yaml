@@ -321,7 +321,7 @@
    - subtract: [pelvis_max_during_flight, pelvis_at_takeoff]
    - convert: $prev
      from: mm
-     to: cm
+     to: m
      
 - parameter: depth_of_movement
   where: 
@@ -330,7 +330,7 @@
    - subtract: [Pelvis_Position.z@StartOfEccentric, Pelvis_Position.z@StartOfConcentric]
    - convert: $prev
      from: mm
-     to: cm
+     to: m
 
 # Find global maximum/minimum/range
 
