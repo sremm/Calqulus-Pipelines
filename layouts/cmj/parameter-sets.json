@@ -2,6 +2,29 @@
 	{
 		"class": "top-level-section",
 		"editable": true,
+		"id": "metrics-tables",
+		"title": "Metrics",
+		"children": [
+			{
+				"class": "tables",
+				"id": "jump-metrics-tables",
+				"editable": true,
+				"title": "",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "metrics-tables"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"class": "top-level-section",
+		"editable": true,
 		"id": "lower-body-kinematics",
 		"title": "Lower Body Kinematics",
 		"children": [

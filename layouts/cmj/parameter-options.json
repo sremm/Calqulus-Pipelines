@@ -75,6 +75,13 @@
 		}
 	},
 	{
+		"id": "tables",
+		"type": "section",
+		"displayOptions": {
+			"stacking": "vertical"
+		}
+	},
+	{
 		"id": "base-table",
 		"type": "table",
 		"displayOptions": {
@@ -105,6 +112,49 @@
 				}
 			]
 		}
+	},
+	{
+		"id": "metrics-tables",
+		"type": "table",
+		"displayOptions": {
+			"title": "Metrics",
+			"precision": 1
+		},
+		"tableOptions": {
+			"orientation": "column",
+			"categories": {
+				"enabled": true
+			},
+			"headers": [
+				{
+					"title": "",
+					"span": 1
+				},
+				{
+					"title": "Values",
+					"span": 1
+				}
+			]
+		},
+		"dataLinks": [
+			{
+				"title": "",
+				"values": [
+					"text://Jump Height"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"jump_height"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "cm"
+			}
+		]
 	},
 	{
 		"id": "pelvic-tilt-graph",
