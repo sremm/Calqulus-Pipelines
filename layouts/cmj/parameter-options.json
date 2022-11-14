@@ -123,7 +123,7 @@
 		"tableOptions": {
 			"orientation": "column",
 			"categories": {
-				"enabled": true
+				"enabled": false
 			},
 			"headers": [
 				{
@@ -131,7 +131,11 @@
 					"span": 1
 				},
 				{
-					"title": "Values",
+					"title": "Min / Max",
+					"span": 1
+				},
+				{
+					"title": "Mean +- Std",
 					"span": 1
 				}
 			]
@@ -140,13 +144,24 @@
 			{
 				"title": "",
 				"values": [
-					"text://Jump Height"
+					"text://Jump Height","text://Depth of Movement"
 				]
 			},
 			{
 				"title": "",
 				"values": [
-					"jump_height"
+					"jump_height","depth_of_movement"
+				],
+				"aggregate": [
+					"min",
+					"max"
+				],
+				"unit": "cm"
+			},
+			{
+				"title": "",
+				"values": [
+					"jump_height","depth_of_movement"
 				],
 				"aggregate": [
 					"mean",
