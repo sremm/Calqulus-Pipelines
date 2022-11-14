@@ -81,7 +81,11 @@
   where:
     name: '!Static*'
   steps:
-    - velocity: Pelvis_Position
+    - convert: Pelvis_Position
+      from: mm
+      to: m
+    - velocity: $prev
+    
 
 # --- Hips ---
 
@@ -339,7 +343,7 @@
    - peakFinder: pelvis_vel_inv
      width: 6
      distance: 100
-     height: 500
+     height: 0.5
   #  - min: Pelvis_Velocity.z
   #    frames: true
 
@@ -349,7 +353,7 @@
   steps:
    - import: Pelvis_Velocity.z => pelvis_vel
    - threshold: Pelvis_Velocity.z
-     value: -100
+     value: -0.1
      direction: down
    - min: $prev
 
