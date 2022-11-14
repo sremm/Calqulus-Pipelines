@@ -90,6 +90,22 @@
   steps:
     - angle: [Hips, RightUpLeg]
 
+- parameter: Left Hip Angles_Vel
+  where: 
+    name: '!Static*'
+  set: left
+  steps:
+    - angularVelocity: [Hips, LeftUpLeg, Hips, LeftUpLeg]
+    - multiply: [$prev, [1, -1, -1]]
+
+- parameter: Right Hip Angles_Vel
+  where: 
+    name: '!Static*'
+  set: right
+  steps:
+    - angularVelocity: [Hips, RightUpLeg, Hips, RightUpLeg]
+    - multiply: [$prev, [1, -1, -1]]
+
 # --- Knee ---
 
 - parameter: Left Knee Angles
@@ -108,6 +124,22 @@
     - angle: [RightUpLeg, RightLeg]
     - multiply: [$prev, [-1, 1, 1]]
 
+- parameter: Left Knee Angles_Vel
+  where: 
+    name: '!Static*'
+  set: left
+  steps:
+    - angularVelocity: [LeftUpLeg, LeftLeg, LeftUpLeg, LeftLeg]
+    - multiply: [$prev, [-1, -1, -1]]
+
+- parameter: Right Knee Angles_Vel
+  where: 
+    name: '!Static*'
+  set: right
+  steps:
+    - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
+    - multiply: [$prev, [-1, 1, 1]]
+
 # --- Ankle ---
 
 - parameter: Left Ankle Angles
@@ -122,6 +154,22 @@
   set: right
   steps:
     - angle: [RightLeg, RightFoot]
+    - multiply: [$prev, [1, 1, -1]]
+
+- parameter: Left Ankle Angles_Vel
+  where: 
+    name: '!Static*'
+  set: left
+  steps:
+    - angularVelocity: [LeftLeg, LeftFoot, LeftLeg, LeftFoot]
+    - multiply: [$prev, [1, -1, 1]]
+
+- parameter: Right Ankle Angles_Vel
+  where: 
+    name: '!Static*'
+  set: right
+  steps:
+    - angularVelocity: [RightLeg, RightFoot, RightLeg, RightFoot]
     - multiply: [$prev, [1, 1, -1]]
 
 # --- Foot ---
