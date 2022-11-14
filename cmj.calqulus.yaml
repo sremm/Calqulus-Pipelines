@@ -67,6 +67,13 @@
     - segment: Hips 
       space: VirtualLab
 
+- parameter: Pelvis_Position_Norm_To_Start
+  where:
+    name: '!Static*'
+  steps:
+    - import: Pelvis_Position
+    - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
+
 - parameter: Pelvis_Velocity
   where:
     name: '!Static*'
