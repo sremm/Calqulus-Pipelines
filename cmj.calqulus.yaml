@@ -73,6 +73,9 @@
   steps:
     - import: Pelvis_Position
     - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
+    - convert: $prev
+      from: mm
+      to: m
 
 - parameter: Pelvis_Velocity
   where:
