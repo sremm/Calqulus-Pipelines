@@ -55,6 +55,28 @@
 		}
 	},
 	{
+		"id": "angular-velocity-timeseries",
+		"inherits":"base-timeseries",
+		"type": "timeseries",
+		"displayOptions": {
+			"precision": 1
+		},
+		"chartOptions": {
+			"xAxis": {
+				"type": "time",
+				"unit": "s"
+			},
+			"yAxis": {
+				"title": "Angular Velocity",
+				"unit": "°/s"
+			},
+			"height": "56%",
+			"colorBy": "set",
+			"playheads": true,
+			"allowSetsToggle": true
+		}
+	},
+	{
 		"id": "timeseries-position",
 		"inherits": "base-timeseries",
 		"type": "timeseries",
@@ -67,6 +89,17 @@
 			"colorBy": "set",
 			"playheads": true,
 			"allowSetsToggle": true
+		}
+	},
+	{
+		"id": "timeseries-velocity",
+		"inherits": "timeseries-position",
+		"type": "timeseries",
+		"chartOptions": {
+			"yAxis": {
+				"title": "Velocity",
+				"unit": "m/s"
+			}
 		}
 	},
 	{
@@ -259,7 +292,7 @@
 	},
 	{
 		"id": "pelvic-vel-z-graph",
-		"inherits": "timeseries-position",
+		"inherits": "timeseries-velocity",
 		"displayOptions": {
 			"title": "Pelvis Velocity Z"
 		},
@@ -408,7 +441,7 @@
 	},
 	{
 		"id": "hip-flexion-vel-graph",
-		"inherits": "base-timeseries",
+		"inherits": "angular-velocity-timeseries",
 		"displayOptions": {
 			"title": "Hip Flexion Velocity"
 		},
@@ -425,7 +458,7 @@
 	},
 	{
 		"id": "knee-flexion-vel-graph",
-		"inherits": "base-timeseries",
+		"inherits": "angular-velocity-timeseries",
 		"displayOptions": {
 			"title": "Knee Flexion Velocity"
 		},
@@ -442,7 +475,7 @@
 	},
 	{
 		"id": "ankle-dorsiflexion-vel-graph",
-		"inherits": "base-timeseries",
+		"inherits": "angular-velocity-timeseries",
 		"displayOptions": {
 			"title": "Ankle Flexion Velocity"
 		},
