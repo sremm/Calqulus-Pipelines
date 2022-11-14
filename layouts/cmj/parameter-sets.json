@@ -1,6 +1,6 @@
 [
 	{
-		"class": "top-level-section",
+		"class": "top-level-section-no-modes",
 		"editable": true,
 		"id": "metrics-tables",
 		"title": "Metrics",

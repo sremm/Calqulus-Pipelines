@@ -20,6 +20,14 @@
 		}
 	},
 	{
+		"id": "top-level-section-no-modes",
+		"inherits": "top-level-section",
+		"displayOptions": {
+			"modeButtons": [],
+			"expand": "max-sidebar"
+		}
+	},
+	{
 		"id": "base-timeseries",
 		"type": "timeseries",
 		"displayOptions": {
