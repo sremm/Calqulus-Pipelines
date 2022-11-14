@@ -53,7 +53,7 @@
 		"chartOptions": {
 			"yAxis": {
 				"title": "Position",
-				"unit": "mm"
+				"unit": "m"
 			},
 			"height": "56%",
 			"colorBy": "set",
@@ -214,12 +214,12 @@
 		"id": "pelvic-x-graph",
 		"inherits": "timeseries-position",
 		"displayOptions": {
-			"title": "Pelvis X"
+			"title": "+ front / - back"
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_Position_X",
-				"title": "Pelvis X"
+				"y": "Pelvis_Position_Norm_To_Start_Y",
+				"title": "Pelvis Y"
 			}
 		]
 	},
@@ -227,12 +227,12 @@
 		"id": "pelvic-y-graph",
 		"inherits": "timeseries-position",
 		"displayOptions": {
-			"title": "Pelvis Y"
+			"title": "+ right / - left"
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_Position_Y",
-				"title": "Pelvis Y"
+				"y": "Pelvis_Position_Norm_To_Start_X",
+				"title": "Pelvis X"
 			}
 		]
 	},
@@ -240,11 +240,11 @@
 		"id": "pelvic-z-graph",
 		"inherits": "timeseries-position",
 		"displayOptions": {
-			"title": "Pelvis Z"
+			"title": "+ up / - down"
 		},
 		"dataLinks": [
 			{
-				"y": "Pelvis_Position_Z",
+				"y": "Pelvis_Position_Norm_To_Start_Z",
 				"title": "Pelvis Z"
 			}
 		]
