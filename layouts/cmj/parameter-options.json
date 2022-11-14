@@ -250,6 +250,19 @@
 		]
 	},
 	{
+		"id": "pelvic-vel-z-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "Pelvis Velocity Z"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvis_Velocity_Z",
+				"title": "Pelvis Velocity Z"
+			}
+		]
+	},
+	{
 		"id": "hip-flexion-graph",
 		"inherits": "base-timeseries",
 		"displayOptions": {
@@ -382,6 +395,57 @@
 			{
 				"y": "Right Ankle Angles_Y",
 				"title": "Right Ankle Inversion"
+			}
+		]
+	},
+	{
+		"id": "hip-flexion-vel-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Hip Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Hip Angles_Vel_X",
+				"title": "Left Hip Flexion Velocity"
+			},
+			{
+				"y": "Right Hip Angles_Vel_X",
+				"title": "Right Hip Flexion Velocity"
+			}
+		]
+	},
+	{
+		"id": "knee-flexion-vel-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Knee Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Knee Angles_Vel_X",
+				"title": "Left Knee Flexion Velocity"
+			},
+			{
+				"y": "Right Knee Angles_Vel_X",
+				"title": "Right Knee Flexion Velocity"
+			}
+		]
+	},
+	{
+		"id": "ankle-dorsiflexion-vel-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Ankle Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Ankle Angles_Vel_X",
+				"title": "Left Ankle Flexion Velocity"
+			},
+			{
+				"y": "Right Ankle Angles_Vel_X",
+				"title": "Right Ankle Flexion Velocity"
 			}
 		]
 	},

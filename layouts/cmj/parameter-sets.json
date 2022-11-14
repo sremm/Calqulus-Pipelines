@@ -73,6 +73,27 @@
 			{
 				"class": "base-section",
 				"editable": true,
+				"id": "lower-body-velocity-pelvis",
+				"title": "Pelvis Velocity",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "dummy"
+							},
+							{
+								"id": "dummy"
+							},
+							{
+								"id": "pelvic-vel-z-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
 				"id": "lower-body-kinematics-hips",
 				"title": "Hip",
 				"children": [
@@ -128,6 +149,27 @@
 							},
 							{
 								"id": "ankle-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-angular-velocities",
+				"title": "Angular Velocities - Frontal Plane",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "hip-flexion-vel-graph"
+							},
+							{
+								"id": "knee-flexion-vel-graph"
+							},
+							{
+								"id": "ankle-dorsiflexion-vel-graph"
 							}
 						]
 					}
