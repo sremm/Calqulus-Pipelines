@@ -96,7 +96,7 @@
   set: left
   steps:
     - angularVelocity: [Hips, LeftUpLeg, Hips, LeftUpLeg]
-    - multiply: [$prev, [1, -1, -1]]
+    - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Hip Angles_Vel
   where: 
@@ -104,7 +104,7 @@
   set: right
   steps:
     - angularVelocity: [Hips, RightUpLeg, Hips, RightUpLeg]
-    - multiply: [$prev, [1, -1, -1]]
+    - multiply: [$prev, [-1, 1, 1]]
 
 # --- Knee ---
 
@@ -130,7 +130,7 @@
   set: left
   steps:
     - angularVelocity: [LeftUpLeg, LeftLeg, LeftUpLeg, LeftLeg]
-    - multiply: [$prev, [-1, -1, -1]]
+    - multiply: [$prev, [1, 1, 1]]
 
 - parameter: Right Knee Angles_Vel
   where: 
@@ -138,7 +138,7 @@
   set: right
   steps:
     - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
-    - multiply: [$prev, [-1, 1, 1]]
+    - multiply: [$prev, [1, 1, 1]]
 
 # --- Ankle ---
 
@@ -162,7 +162,7 @@
   set: left
   steps:
     - angularVelocity: [LeftLeg, LeftFoot, LeftLeg, LeftFoot]
-    - multiply: [$prev, [1, -1, 1]]
+    - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Ankle Angles_Vel
   where: 
@@ -170,7 +170,7 @@
   set: right
   steps:
     - angularVelocity: [RightLeg, RightFoot, RightLeg, RightFoot]
-    - multiply: [$prev, [1, 1, -1]]
+    - multiply: [$prev, [-1, 1, 1]]
 
 # --- Foot ---
 - parameter: Left Toe Base_Position
