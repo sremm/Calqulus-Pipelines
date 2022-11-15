@@ -51,7 +51,29 @@
 			"height": "56%",
 			"colorBy": "set",
 			"playheads": true,
-			"allowSetsToggle": true
+			"allowSetsToggle": true,
+			"events": [
+				{
+					"name": "StartOfEccentric",
+					"title": "StartOfEccentric",
+					"symbol": "tick"
+				},
+				{
+					"name": "StartOfConcentric",
+					"title": "StartOfConcentric",
+					"symbol": "tick"
+				},
+				{
+					"name": "Takeoff",
+					"title": "Takeoff",
+					"symbol": "tick"
+				},
+				{
+					"name": "Touchdown",
+					"title": "Touchdown",
+					"symbol": "tick"
+				}
+			]
 		}
 	},
 	{
