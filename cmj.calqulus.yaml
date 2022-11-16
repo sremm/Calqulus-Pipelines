@@ -303,6 +303,7 @@
       value: 200
       direction: up
       export: vel_over_thresh
+    - min:
 
 
     # - eventMask: [Left Toe Base_Velocity.z, BOF, vel_over_thresh]
@@ -328,6 +329,8 @@
       value: 200
       direction: up
       export: vel_over_thresh
+    - min:
+      
 
 - event: Takeoff
   where: 
