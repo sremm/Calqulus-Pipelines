@@ -101,10 +101,6 @@
 			"precision": 1
 		},
 		"chartOptions": {
-			"xAxis": {
-				"type": "time",
-				"unit": "s"
-			},
 			"yAxis": {
 				"title": "Angular Velocity",
 				"unit": "°/s"
