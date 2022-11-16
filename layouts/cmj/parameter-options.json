@@ -41,8 +41,9 @@
 		},
 		"chartOptions": {
 			"xAxis": {
-				"type": "time",
-				"unit": "s"
+				"type": "normalized",
+				"title": "StartOfEccentric -> Touchdown",
+				"unit": "%"
 			},
 			"yAxis": {
 				"title": "Angle",
@@ -74,7 +75,23 @@
 					"symbol": "tick"
 				}
 			]
-		}
+		},
+		"normalization": [
+			{
+				"set": "left",
+				"start": "StartOfEccentric",
+				"end": "Touchdown"
+			},
+			{
+				"set": "right",
+				"start": "StartOfEccentric",
+				"end": "Touchdown"
+			},
+			{
+				"start": "StartOfEccentric",
+				"end": "Touchdown"
+			}
+		]
 	},
 	{
 		"id": "angular-velocity-timeseries",
