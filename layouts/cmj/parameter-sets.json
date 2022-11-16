@@ -201,6 +201,27 @@
 			{
 				"class": "base-section",
 				"editable": true,
+				"id": "upper-body-kinematics-thorax-lab",
+				"title": "Thorax",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "thorax-lab-tilt-graph"
+							},
+							{
+								"id": "thorax-lab-obliquity-graph"
+							},
+							{
+								"id": "thorax-lab-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
 				"id": "upper-body-kinematics-thorax",
 				"title": "Thorax",
 				"children": [

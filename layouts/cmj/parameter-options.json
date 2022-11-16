@@ -582,6 +582,45 @@
 		]
 	},
 	{
+		"id": "thorax-lab-tilt-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Anterior Tilt wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_X",
+				"title": "Thorax-Lab Tilt"
+			}
+		]
+	},
+	{
+		"id": "thorax-lab-obliquity-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Up Obliquity wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_Y",
+				"title": "Thorax-Lab Obliquity"
+			}
+		]
+	},
+	{
+		"id": "thorax-lab-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Rotation wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_Z",
+				"title": "Thorax-Lab Rotation"
+			}
+		]
+	},
+	{
 		"id": "thorax-pelvis-tilt-graph",
 		"inherits": "base-timeseries",
 		"displayOptions": {
