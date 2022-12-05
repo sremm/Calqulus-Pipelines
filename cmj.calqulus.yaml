@@ -158,6 +158,7 @@
 - parameter: Left Knee_Position
   where:
     name: '!Static*'
+  set: left
   steps:
     - segment: LeftLeg 
       space: VirtualLab
@@ -165,6 +166,7 @@
 - parameter: Right Knee_Position
   where:
     name: '!Static*'
+  set: right
   steps:
     - segment: RightLeg 
       space: VirtualLab
