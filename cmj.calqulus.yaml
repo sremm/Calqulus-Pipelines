@@ -162,7 +162,7 @@
   steps:
     - segment: LeftLeg 
       space: VirtualLab
-    - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
+    - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [1, -1, 1]]
     - convert: $prev
      from: mm
@@ -175,7 +175,7 @@
   steps:
     - segment: RightLeg 
       space: VirtualLab
-    - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
+    - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [1, -1, 1]]
     - convert: $prev
      from: mm
