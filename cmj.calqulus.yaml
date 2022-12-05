@@ -155,6 +155,13 @@
     - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
     - multiply: [$prev, [1, 1, 1]]
 
+- parameter: Knees_Position
+  where:
+    name: '!Static*'
+  steps:
+    - segment: LeftUpLeg 
+      space: VirtualLab
+
 # --- Ankle ---
 
 - parameter: Left Ankle Angles
