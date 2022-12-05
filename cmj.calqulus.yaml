@@ -443,8 +443,8 @@
    - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
      output: pelvis_z_during_flight
    - max: pelvis_z_during_flight => pelvis_max_during_flight
-   - import: Pelvis_Position.z@Takeoff => pelvis_at_takeoff
-   - subtract: [pelvis_max_during_flight, pelvis_at_takeoff]
+   - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
+   - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
    - convert: $prev
      from: mm
      to: m
