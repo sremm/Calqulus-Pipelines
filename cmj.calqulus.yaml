@@ -165,8 +165,8 @@
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [1, -1, 1]]
     - convert: $prev
-     from: mm
-     to: m
+      from: mm
+      to: m
 
 - parameter: Right Knee_Position
   where:
@@ -178,8 +178,8 @@
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [1, -1, 1]]
     - convert: $prev
-     from: mm
-     to: m
+      from: mm
+      to: m
 
 # --- Ankle ---
 
