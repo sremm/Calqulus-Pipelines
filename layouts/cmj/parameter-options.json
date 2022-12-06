@@ -112,6 +112,24 @@
 		}
 	},
 	{
+		"id": "trajectory-graph-frontal",
+		"inherits": "base-timeseries",
+		"chartOptions": {
+			"playheads": false,
+			"xAxis": {
+				"title": "Right/Left",
+				"unit": "m"
+			},
+			"yAxis": {
+				"title": "Down/Up",
+				"unit": "m"
+			},
+			"height": "50%",
+			"standaloneHeight": "56%",
+			"colorBy": "set"
+		}
+	},
+	{
 		"id": "timeseries-position",
 		"inherits": "base-timeseries",
 		"type": "timeseries",
@@ -244,6 +262,23 @@
 					"stddev"
 				],
 				"unit": "cm"
+			}
+		]
+	},
+	{
+		"id": "knee-trajectory-frontal-graph",
+		"inherits": "trajectory-graph-frontal",
+		"displayOptions": {
+			"title": "Knee Movement Frontal View"
+		},
+		"dataLinks": [
+			{
+				"x": "Left Knee_Position_X",
+				"y": "Left Knee_Position_Z"
+			},
+			{
+				"x": "Right Knee_Position_X",
+				"y": "Right Knee_Position_Z"
 			}
 		]
 	},

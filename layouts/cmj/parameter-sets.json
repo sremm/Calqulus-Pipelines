@@ -31,6 +31,17 @@
 			{
 				"class": "base-section",
 				"editable": true,
+				"id": "knee-trajectory-frontal",
+				"title": "Knee Movement seen from the front",
+				"children": [
+					{
+						"id": "knee-trajectory-frontal-graph"
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
 				"id": "lower-body-kinematics-pelvis",
 				"title": "Pelvis Angles",
 				"children": [
