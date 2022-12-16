@@ -1,11 +1,11 @@
 # A pipeline is written in YAML and instructs the Calqulus processing engine what to calculate.
 # In order to process this pipeline, skeleton must be solved in QTM first.
 
-# A pipeline consists of any number of base nodes defined on the root level. 
+# A pipeline consists of any number of base nodes defined on the root level.
 
 # Output nodes define an end result that is exported to the global scope and exported in the resulting JSON file.
 # Output node can be 'event' or 'parameter'
-# The main difference between the parameter and event is what type of data is stored. 
+# The main difference between the parameter and event is what type of data is stored.
 # A parameter node will store series and scalar data, whereas an event node will store event data.
 
 # Space node defines custom coordinate systems. It is useful when orientation of subject changes
@@ -28,19 +28,19 @@
 
 # An event node defines steps used to calculate an event.
 # An event is a label that describes one or more points in time.
-# Events can be used in both event and parameter calculations, as well as for normalization by the reporting framework. 
+# Events can be used in both event and parameter calculations, as well as for normalization by the reporting framework.
 # The resulting event is exported to the global scope and exported in the resulting JSON file.
 
 # Create event at left knee maximum flexion
 - event: BOF
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: [0]
-  
+
 - event: EOF
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: [$length]
 
@@ -54,22 +54,22 @@
 
 - parameter: Pelvic Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
-  
+
 - parameter: Pelvis_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
-    - segment: Hips 
+    - segment: Hips
       space: VirtualLab
 
 - parameter: Pelvis_Position_Norm_To_Start
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: Pelvis_Position
     - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
@@ -79,19 +79,18 @@
 
 - parameter: Pelvis_Velocity
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - convert: Pelvis_Position
       from: mm
       to: m
     - velocity: $prev
-    
 
 # --- Hips ---
 
 - parameter: Left Hip Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [Hips, LeftUpLeg] # when two segments are specified, joint angle between the segments is calculated
@@ -99,22 +98,22 @@
 
 - parameter: Right Hip Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [Hips, RightUpLeg]
 
 - parameter: Left Hip Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [Hips, LeftUpLeg, Hips, LeftUpLeg]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Hip Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [Hips, RightUpLeg, Hips, RightUpLeg]
@@ -124,7 +123,7 @@
 
 - parameter: Left Knee Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftUpLeg, LeftLeg]
@@ -133,23 +132,23 @@
 
 - parameter: Right Knee Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightUpLeg, RightLeg]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Left Knee Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [LeftUpLeg, LeftLeg, LeftUpLeg, LeftLeg]
     - multiply: [$prev, [1, 1, 1]]
 
 - parameter: Right Knee Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
@@ -157,10 +156,10 @@
 
 - parameter: Left Knee_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
-    - segment: LeftLeg 
+    - segment: LeftLeg
       space: VirtualLab
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [-1, 1, 1]]
@@ -170,10 +169,10 @@
 
 - parameter: Right Knee_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
-    - segment: RightLeg 
+    - segment: RightLeg
       space: VirtualLab
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [-1, 1, 1]]
@@ -191,23 +190,23 @@
 
 - parameter: Right Ankle Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightLeg, RightFoot]
     - multiply: [$prev, [1, 1, -1]]
 
 - parameter: Left Ankle Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [LeftLeg, LeftFoot, LeftLeg, LeftFoot]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Ankle Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [RightLeg, RightFoot, RightLeg, RightFoot]
@@ -217,7 +216,7 @@
 - parameter: Left Toe Base_Position
   set: left
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - segment: LeftToeBase
       space: VirtualLab
@@ -225,7 +224,7 @@
 - parameter: Right Toe Base_Position
   set: right
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - segment: RightToeBase
       space: VirtualLab
@@ -233,30 +232,29 @@
 - parameter: Left Toe Base_Velocity
   set: left
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - velocity: Left Toe Base_Position
-  
+
 - parameter: Right Toe Base_Velocity
   set: right
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - velocity: Right Toe Base_Position
-      
 
 # --- Thorax ---
 
 - parameter: Thorax Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: [Hips, Spine2]
     - multiply: [$prev, [-1, -1, 1]]
 
 - parameter: Thorax Angles_Lab
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: Spine2
       space: VirtualLab # calculate angle relative to virtual lab
@@ -266,7 +264,7 @@
 
 - parameter: Left Shoulder Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [Spine2, LeftArm]
@@ -274,7 +272,7 @@
 
 - parameter: Right Shoulder Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [Spine2, RightArm]
@@ -284,7 +282,7 @@
 
 - parameter: Left Elbow Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftArm, LeftForeArm]
@@ -292,7 +290,7 @@
 
 - parameter: Right Elbow Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightArm, RightForeArm]
@@ -301,7 +299,7 @@
 
 - parameter: Left Wrist Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftForeArm, LeftHand]
@@ -309,7 +307,7 @@
 
 - parameter: Right Wrist Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightForeArm, RightHand]
@@ -319,10 +317,9 @@
 
 - parameter: Head Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: [Head, Spine2]
-
 
 ############
 ## EVENTS ##
@@ -351,14 +348,14 @@
 #     - min:
 
 # - event: Takeoff
-#   where: 
+#   where:
 #     name: '!Static*'
 #   steps:
 #     - mean: [Takeoff_right, Takeoff_left]
 
 - event: Takeoff
   where:
-    name: '!Static*'   
+    name: "!Static*"
   steps:
     - peakFinder: Pelvis_Velocity.z
       width: 6
@@ -366,69 +363,65 @@
       height: 0.5
     - min:
 
-
 - event: Touchdown
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - negate: Pelvis_Velocity.z => pelvis_vel_inv
-   - peakFinder: pelvis_vel_inv
-     width: 6
-     distance: 100
-     height: 0.5
-   - max:
+    - negate: Pelvis_Velocity.z => pelvis_vel_inv
+    - peakFinder: pelvis_vel_inv
+      width: 6
+      distance: 100
+      height: 0.5
+    - max:
   #  - min: Pelvis_Velocity.z
   #    frames: true
 
 - event: PelvisVelDownEvent03
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.3
-     direction: down
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - threshold: Pelvis_Velocity.z
+      value: -0.3
+      direction: down
 
 - event: PelvisVelDownEvent
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.1
-     direction: down
-   - refineEvent: $prev
-     sequence: [$prev, PelvisVelDownEvent03]
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - threshold: Pelvis_Velocity.z
+      value: -0.1
+      direction: down
+    - refineEvent: $prev
+      sequence: [$prev, PelvisVelDownEvent03]
 
 - event: PelvisVelUpEvent
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - threshold: Pelvis_Velocity.z
-     direction: up
-     value: 0
+    - threshold: Pelvis_Velocity.z
+      direction: up
+      value: 0
 
 - event: StartOfEccentric
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - refineEvent: PelvisVelDownEvent
-     sequence: [PelvisVelDownEvent, PelvisVelUpEvent]
-     cyclic: false
-   - refineEvent: $prev
-     sequence: [$prev, PelvisVelUpEvent, Takeoff]
-     cyclic: false
-     
-
+    - refineEvent: PelvisVelDownEvent
+      sequence: [PelvisVelDownEvent, PelvisVelUpEvent]
+      cyclic: false
+    - refineEvent: $prev
+      sequence: [$prev, PelvisVelUpEvent, Takeoff]
+      cyclic: false
 
 - event: StartOfConcentric
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - refineEvent: PelvisVelUpEvent
-     sequence: [StartOfEccentric, PelvisVelUpEvent, Takeoff]
-     cyclic: false
-
+    - refineEvent: PelvisVelUpEvent
+      sequence: [StartOfEccentric, PelvisVelUpEvent, Takeoff]
+      cyclic: false
 
 #############
 ## Metrics ##
@@ -437,33 +430,67 @@
 # Some jump metrics
 
 - parameter: jump_height
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
-     output: pelvis_z_during_flight
-   - max: pelvis_z_during_flight => pelvis_max_during_flight
-   - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
-   - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
-   - convert: $prev
-     from: mm
-     to: m
-     
+    - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
+      output: pelvis_z_during_flight
+    - max: pelvis_z_during_flight => pelvis_max_during_flight
+    - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
+    - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
+    - convert: $prev
+      from: mm
+      to: m
+
 - parameter: depth_of_movement
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - subtract: [Pelvis_Position.z@StartOfEccentric, Pelvis_Position.z@StartOfConcentric]
-   - convert: $prev
-     from: mm
-     to: m
+    - subtract:
+        [
+          Pelvis_Position.z@StartOfEccentric,
+          Pelvis_Position.z@StartOfConcentric,
+        ]
+    - convert: $prev
+      from: mm
+      to: m
+
+- parameter: contraction_time
+  where:
+    name: "!Static*"
+  steps:
+    - eventDuration: [StartOfEccentric, Takeoff]
+
+- parameter: eccentric_time
+  where:
+    name: "!Static*"
+  steps:
+    - eventDuration: [StartOfEccentric, StartOfConcentric]
+
+- parameter: concentric_time
+  where:
+    name: "!Static*"
+  steps:
+    - eventDuration: [StartOfConcentric, Takeoff]
+
+- parameter: flight_time
+  where:
+    name: "!Static*"
+  steps:
+    - eventDuration: [Takeoff, Touchdown]
+
+- parameter: flight_time_contraction_time_ratio
+  where:
+    name: "!Static*"
+  steps:
+    - divide: [flight_time, contraction_time]
 
 # Find global maximum/minimum/range
 
 # Pelvis
 - parameter: Pelvis Tilt max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Pelvic Angles
@@ -472,7 +499,7 @@
 
 - parameter: Pelvis Tilt min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Pelvic Angles
@@ -481,7 +508,7 @@
 
 - parameter: Pelvis Tilt range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Pelvis Tilt max, Pelvis Tilt min]
@@ -489,7 +516,7 @@
 # Hips
 - parameter: Left Hip Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Hip Angles
@@ -498,7 +525,7 @@
 
 - parameter: Left Hip Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Hip Angles
@@ -507,14 +534,14 @@
 
 - parameter: Left Hip Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Hip Flex max, Left Hip Flex min]
 
 - parameter: Right Hip Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Hip Angles
@@ -523,7 +550,7 @@
 
 - parameter: Right Hip Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Hip Angles
@@ -532,7 +559,7 @@
 
 - parameter: Right Hip Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Hip Flex max, Right Hip Flex min]
@@ -540,7 +567,7 @@
 # Knees
 - parameter: Left Knee Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Knee Angles
@@ -549,7 +576,7 @@
 
 - parameter: Left Knee Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Knee Angles
@@ -558,14 +585,14 @@
 
 - parameter: Left Knee Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Knee Flex max, Left Knee Flex min]
 
 - parameter: Right Knee Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Knee Angles
@@ -574,7 +601,7 @@
 
 - parameter: Right Knee Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Knee Angles
@@ -583,7 +610,7 @@
 
 - parameter: Right Knee Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Knee Flex max, Right Knee Flex min]
@@ -591,7 +618,7 @@
 # Ankles
 - parameter: Left Ankle Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Ankle Angles
@@ -600,7 +627,7 @@
 
 - parameter: Left Ankle Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Ankle Angles
@@ -609,14 +636,14 @@
 
 - parameter: Left Ankle Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Ankle Flex max, Left Ankle Flex min]
 
 - parameter: Right Ankle Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Ankle Angles
@@ -625,7 +652,7 @@
 
 - parameter: Right Ankle Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Ankle Angles
@@ -634,7 +661,7 @@
 
 - parameter: Right Ankle Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Ankle Flex max, Right Ankle Flex min]
@@ -642,7 +669,7 @@
 # Shoulders
 - parameter: Left Shoulder Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Shoulder Angles
@@ -651,7 +678,7 @@
 
 - parameter: Left Shoulder Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Shoulder Angles
@@ -660,14 +687,14 @@
 
 - parameter: Left Shoulder Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Shoulder Flex max, Left Shoulder Flex min]
 
 - parameter: Right Shoulder Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Shoulder Angles
@@ -676,7 +703,7 @@
 
 - parameter: Right Shoulder Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Shoulder Angles
@@ -685,7 +712,7 @@
 
 - parameter: Right Shoulder Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Shoulder Flex max, Right Shoulder Flex min]
@@ -693,7 +720,7 @@
 # Elbows
 - parameter: Left Elbow Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Elbow Angles
@@ -702,7 +729,7 @@
 
 - parameter: Left Elbow Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Elbow Angles
@@ -711,14 +738,14 @@
 
 - parameter: Left Elbow Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Elbow Flex max, Left Elbow Flex min]
 
 - parameter: Right Elbow Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Elbow Angles
@@ -727,7 +754,7 @@
 
 - parameter: Right Elbow Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Elbow Angles
@@ -736,7 +763,7 @@
 
 - parameter: Right Elbow Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Elbow Flex max, Right Elbow Flex min]
@@ -744,7 +771,7 @@
 # Wrists
 - parameter: Left Wrist Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Wrist Angles
@@ -753,7 +780,7 @@
 
 - parameter: Left Wrist Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Left Wrist Angles
@@ -762,14 +789,14 @@
 
 - parameter: Left Wrist Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Left Wrist Flex max, Left Wrist Flex min]
 
 - parameter: Right Wrist Flex max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Wrist Angles
@@ -778,7 +805,7 @@
 
 - parameter: Right Wrist Flex min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - import: Right Wrist Angles
@@ -787,7 +814,7 @@
 
 - parameter: Right Wrist Flex range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - subtract: [Right Wrist Flex max, Right Wrist Flex min]
@@ -795,7 +822,7 @@
 # Thorax
 - parameter: Thorax Forward Tilt max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Thorax Angles
@@ -804,7 +831,7 @@
 
 - parameter: Thorax Forward Tilt min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Thorax Angles
@@ -813,7 +840,7 @@
 
 - parameter: Thorax Forward Tilt range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Thorax Forward Tilt max, Thorax Forward Tilt min]
@@ -821,7 +848,7 @@
 # Head
 - parameter: Head Forward Tilt max
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Head Angles
@@ -830,7 +857,7 @@
 
 - parameter: Head Forward Tilt min
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - import: Head Angles
@@ -839,7 +866,7 @@
 
 - parameter: Head Forward Tilt range
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - subtract: [Head Forward Tilt max, Head Forward Tilt min]
