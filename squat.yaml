@@ -361,19 +361,28 @@
      direction: up
      value: 0
 
+
+- parameter: filtered_inverted_pelvis_z
+  steps:
+    - negate: Pelvis_Position.z => pelvis_pos_inv
+    - min: pelvis_pos_inv => min_pos
+    - subtract: [pelvis_pos_inv, min_pos]
+    - lowpass: $prev
+      extrapolate: 100
+      order: 6
+      cutoff: 5
+    - convert: $prev
+      from: mm
+      to: m
+
 - event: PelvisPosValleyEvent
   where: 
     name: '!Static*'
   steps:
-    # - negate: Pelvis_Position.z => pelvis_pos_inv
-    - lowpass: Pelvis_Position.z
-      extrapolate: 100
-      order: 6
-      cutoff: 5
-    - peakFinder: $prev
+    - peakFinder: filtered_inverted_pelvis_z
       width: 5
       distance: 100
-      height: 50
+      height: 0.1
     # - min:
 
 - event: StartOfEccentric
@@ -393,8 +402,8 @@
   where: 
     name: '!Static*'
   steps:
-   - refineEvent: PelvisVelUpEvent
-     sequence: [StartOfEccentric, PelvisVelUpEvent]
+   - refineEvent: PelvisPosValleyEvent
+     sequence: [StartOfEccentric, PelvisPosValleyEvent]
      cyclic: false
 
 - event: EndOfConcentric
