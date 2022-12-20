@@ -95,7 +95,7 @@
 	},
 	{
 		"id": "angular-velocity-timeseries",
-		"inherits":"base-timeseries",
+		"inherits": "base-timeseries",
 		"type": "timeseries",
 		"displayOptions": {
 			"precision": 1
@@ -212,7 +212,7 @@
 		"type": "table",
 		"displayOptions": {
 			"title": "Metrics",
-			"precision": 1
+			"precision": 2
 		},
 		"tableOptions": {
 			"orientation": "column",
@@ -225,11 +225,11 @@
 					"span": 1
 				},
 				{
-					"title": "Min / Max",
+					"title": "Mean +- Std",
 					"span": 1
 				},
 				{
-					"title": "Mean +- Std",
+					"title": "Min / Max",
 					"span": 1
 				}
 			]
@@ -238,30 +238,54 @@
 			{
 				"title": "",
 				"values": [
-					"text://Jump Height","text://Depth of Movement"
+					"text://Jump Height",
+					"text://Depth of Movement",
+					"text://Flight Time To Contraction Time Ratio",
+					"text://Flight Time",
+					"text://Contraction Time"
 				]
 			},
 			{
 				"title": "",
 				"values": [
-					"jump_height","depth_of_movement"
-				],
-				"aggregate": [
-					"min",
-					"max"
-				],
-				"unit": "cm"
-			},
-			{
-				"title": "",
-				"values": [
-					"jump_height","depth_of_movement"
+					"jump_height",
+					"depth_of_movement",
+					"flight_time_contraction_time_ratio",
+					"flight_time",
+					"contraction_time"
 				],
 				"aggregate": [
 					"mean",
 					"stddev"
 				],
-				"unit": "cm"
+				"unit": [
+					"cm",
+					"cm",
+					"",
+					"s",
+					"s"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"jump_height",
+					"depth_of_movement",
+					"flight_time_contraction_time_ratio",
+					"flight_time",
+					"contraction_time"
+				],
+				"aggregate": [
+					"min",
+					"max"
+				],
+				"unit": [
+					"cm",
+					"cm",
+					"",
+					"s",
+					"s"
+				]
 			}
 		]
 	},
