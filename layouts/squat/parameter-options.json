@@ -9,8 +9,8 @@
 		"displayOptions": {
 			"stacking": "vertical",
 			"modeButtons": [
-				"mean",
-				"consistency"
+				"consistency",
+				"mean"
 			],
 			"expand": "max-sidebar"
 		},
