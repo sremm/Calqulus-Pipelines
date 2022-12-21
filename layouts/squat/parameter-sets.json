@@ -185,21 +185,6 @@
 						]
 					}
 				]
-			},
-			{
-				"class": "collapsable-tables",
-				"id": "lower-body-tables",
-				"editable": true,
-				"title": "",
-				"children": [
-					{
-						"children": [
-							{
-								"id": "lower-body-table"
-							}
-						]
-					}
-				]
 			}
 		]
 	},
@@ -288,21 +273,6 @@
 							},
 							{
 								"id": "elbow-rotation-graph"
-							}
-						]
-					}
-				]
-			},
-			{
-				"class": "collapsable-tables",
-				"id": "upper-body-tables",
-				"editable": true,
-				"title": "",
-				"children": [
-					{
-						"children": [
-							{
-								"id": "upper-body-table"
 							}
 						]
 					}
