@@ -210,7 +210,7 @@
 - parameter: Right Knee_Position_right
   where:
     name: '*Right*'
-  set: Right
+  set: right
   steps:
     - import: Right Knee_Position
 
