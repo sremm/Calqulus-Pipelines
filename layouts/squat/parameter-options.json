@@ -220,11 +220,15 @@
 					"span": 1
 				},
 				{
-					"title": "Mean +- Std",
+					"title": "Left",
 					"span": 1
 				},
 				{
-					"title": "Min / Max",
+					"title": "Right",
+					"span": 1
+				},
+				{
+					"title": "Bilateral",
 					"span": 1
 				}
 			]
@@ -234,16 +238,18 @@
 				"title": "",
 				"values": [
 					"text://Depth of Movement",
-					"text://Depth of Movement Left",
-					"text://Depth of Movement Right"
+					"text://Eccentric Time",
+					"text://Concentric Time",
+					"text://Total Time"
 				]
 			},
 			{
-				"title": "",
+				"title": "Mean +- Std",
 				"values": [
-					"depth_of_movement",
 					"depth_of_movement_left",
-					"depth_of_movement_right"
+					"eccentric_time_left",
+					"concentric_time_left",
+					"contraction_time_left"
 
 				],
 				"aggregate": [
@@ -252,25 +258,49 @@
 				],
 				"unit": [
 					"cm",
+					"s",
+					"s",
+					"s"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"depth_of_movement_right",
+					"eccentric_time_right",
+					"concentric_time_right",
+					"contraction_time_right"
+
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": [
 					"cm",
-					"cm"
+					"s",
+					"s",
+					"s"
 				]
 			},
 			{
 				"title": "",
 				"values": [
 					"depth_of_movement",
-					"depth_of_movement_left",
-					"depth_of_movement_right"
+					"eccentric_time",
+					"concentric_time",
+					"contraction_time"
+
 				],
 				"aggregate": [
-					"min",
-					"max"
+					"mean",
+					"stddev"
 				],
 				"unit": [
 					"cm",
-					"cm",
-					"cm"
+					"s",
+					"s",
+					"s"
 				]
 			}
 		]
