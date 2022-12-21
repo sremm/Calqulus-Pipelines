@@ -1,0 +1,878 @@
+[
+	{
+		"id": "base-section",
+		"type": "section"
+	},
+	{
+		"id": "top-level-section",
+		"inherits": "base-section",
+		"displayOptions": {
+			"stacking": "vertical",
+			"modeButtons": [
+				"mean",
+				"consistency"
+			],
+			"expand": "max-sidebar"
+		},
+		"printOptions": {
+			"avoidBreaks": true,
+			"avoidLeadingBreak": true
+		}
+	},
+	{
+		"id": "top-level-section-no-modes",
+		"inherits": "top-level-section",
+		"displayOptions": {
+			"modeButtons": [],
+			"expand": "max-sidebar"
+		}
+	},
+	{
+		"id": "base-timeseries",
+		"type": "timeseries",
+		"displayOptions": {
+			"precision": 2,
+			"annotations": true,
+			"modes": [
+				"mean",
+				"consistency"
+			],
+			"expand": "max-sidebar"
+		},
+		"chartOptions": {
+			"xAxis": {
+				"type": "normalized",
+				"title": "StartOfEccentric -> EndOfConcentric",
+				"unit": "%"
+			},
+			"yAxis": {
+				"title": "Angle",
+				"unit": "°"
+			},
+			"height": "56%",
+			"colorBy": "set",
+			"playheads": true,
+			"allowSetsToggle": true,
+			"events": [
+				{
+					"name": "StartOfEccentric",
+					"title": "StartOfEccentric",
+					"symbol": "tick"
+				},
+				{
+					"name": "StartOfConcentric",
+					"title": "StartOfConcentric",
+					"symbol": "tick"
+				},
+				{
+					"name": "EndOfConcentric",
+					"title": "EndOfConcentric",
+					"symbol": "tick"
+				}
+			]
+		},
+		"normalization": [
+			{
+				"set": "left",
+				"start": "StartOfEccentric",
+				"end": "EndOfConcentric"
+			},
+			{
+				"set": "right",
+				"start": "StartOfEccentric",
+				"end": "EndOfConcentric"
+			},
+			{
+				"start": "StartOfEccentric",
+				"end": "EndOfConcentric"
+			}
+		]
+	},
+	{
+		"id": "angular-velocity-timeseries",
+		"inherits": "base-timeseries",
+		"type": "timeseries",
+		"displayOptions": {
+			"precision": 1
+		},
+		"chartOptions": {
+			"yAxis": {
+				"title": "Angular Velocity",
+				"unit": "°/s"
+			},
+			"height": "56%",
+			"colorBy": "set",
+			"playheads": true,
+			"allowSetsToggle": true
+		}
+	},
+	{
+		"id": "trajectory-graph-frontal",
+		"inherits": "base-timeseries",
+		"chartOptions": {
+			"playheads": false,
+			"xAxis": {
+				"title": "Right/Left",
+				"unit": "m"
+			},
+			"yAxis": {
+				"title": "Down/Up",
+				"unit": "m"
+			},
+			"height": "50%",
+			"standaloneHeight": "56%",
+			"colorBy": "set"
+		}
+	},
+	{
+		"id": "timeseries-position",
+		"inherits": "base-timeseries",
+		"type": "timeseries",
+		"chartOptions": {
+			"yAxis": {
+				"title": "Position",
+				"unit": "m"
+			},
+			"height": "56%",
+			"colorBy": "set",
+			"playheads": true,
+			"allowSetsToggle": true
+		}
+	},
+	{
+		"id": "timeseries-velocity",
+		"inherits": "timeseries-position",
+		"type": "timeseries",
+		"chartOptions": {
+			"yAxis": {
+				"title": "Velocity",
+				"unit": "m/s"
+			}
+		}
+	},
+	{
+		"id": "collapsable-tables",
+		"type": "section",
+		"displayOptions": {
+			"stacking": "vertical",
+			"collapsible": {
+				"enabled": true,
+				"collapsed": true,
+				"labelCollapsed": "Show table",
+				"labelExpanded": "Hide table"
+			}
+		}
+	},
+	{
+		"id": "tables",
+		"type": "section",
+		"displayOptions": {
+			"stacking": "vertical"
+		}
+	},
+	{
+		"id": "base-table",
+		"type": "table",
+		"displayOptions": {
+			"title": "Range of Motion",
+			"precision": 1
+		},
+		"tableOptions": {
+			"orientation": "column",
+			"categories": {
+				"enabled": false
+			},
+			"headers": [
+				{
+					"title": "",
+					"span": 1
+				},
+				{
+					"title": "Max",
+					"span": 1
+				},
+				{
+					"title": "Min",
+					"span": 1
+				},
+				{
+					"title": "Range",
+					"span": 1
+				}
+			]
+		}
+	},
+	{
+		"id": "metrics-tables",
+		"type": "table",
+		"displayOptions": {
+			"title": "Metrics",
+			"precision": 2
+		},
+		"tableOptions": {
+			"orientation": "column",
+			"categories": {
+				"enabled": false
+			},
+			"headers": [
+				{
+					"title": "",
+					"span": 1
+				},
+				{
+					"title": "Mean +- Std",
+					"span": 1
+				},
+				{
+					"title": "Min / Max",
+					"span": 1
+				}
+			]
+		},
+		"dataLinks": [
+			{
+				"title": "",
+				"values": [
+					"text://Depth of Movement",
+					"text://Depth of Movement Left",
+					"text://Depth of Movement Right"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"depth_of_movement",
+					"depth_of_movement_left",
+					"depth_of_movement_right"
+
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": [
+					"cm",
+					"cm",
+					"cm"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"depth_of_movement",
+					"depth_of_movement_left",
+					"depth_of_movement_right"
+				],
+				"aggregate": [
+					"min",
+					"max"
+				],
+				"unit": [
+					"cm",
+					"cm",
+					"cm"
+				]
+			}
+		]
+	},
+	{
+		"id": "knee-trajectory-frontal-graph",
+		"inherits": "trajectory-graph-frontal",
+		"displayOptions": {
+			"title": "Knee Movement Frontal View"
+		},
+		"dataLinks": [
+			{
+				"x": "Left Knee_Position_X",
+				"y": "Left Knee_Position_Z"
+			},
+			{
+				"x": "Right Knee_Position_X",
+				"y": "Right Knee_Position_Z"
+			}
+		]
+	},
+	{
+		"id": "pelvic-tilt-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Pelvic Anterior Tilt"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvic Angles_X",
+				"title": "Pelvic Tilt"
+			}
+		]
+	},
+	{
+		"id": "pelvic-obliquity-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Pelvic Up Obliquity"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvic Angles_Y",
+				"title": "Pelvic Obliquity"
+			}
+		]
+	},
+	{
+		"id": "pelvic-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Pelvic Internal Rotation"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvic Angles_Z",
+				"title": "Pelvic Rotation"
+			}
+		]
+	},
+	{
+		"id": "pelvic-x-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "+ front / - back"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvis_Position_Norm_To_Start_Y",
+				"title": "Pelvis Y"
+			}
+		]
+	},
+	{
+		"id": "pelvic-y-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "+ right / - left"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvis_Position_Norm_To_Start_X",
+				"title": "Pelvis X"
+			}
+		]
+	},
+	{
+		"id": "pelvic-z-graph",
+		"inherits": "timeseries-position",
+		"displayOptions": {
+			"title": "+ up / - down"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvis_Position_Norm_To_Start_Z",
+				"title": "Pelvis Z"
+			}
+		]
+	},
+	{
+		"id": "pelvic-vel-z-graph",
+		"inherits": "timeseries-velocity",
+		"displayOptions": {
+			"title": "Pelvis Velocity Z"
+		},
+		"dataLinks": [
+			{
+				"y": "Pelvis_Velocity_Z",
+				"title": "Pelvis Velocity Z"
+			}
+		]
+	},
+	{
+		"id": "hip-flexion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Hip Flexion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Hip Angles_X",
+				"title": "Left Hip Flexion"
+			},
+			{
+				"y": "Right Hip Angles_X",
+				"title": "Right Hip Flexion"
+			}
+		]
+	},
+	{
+		"id": "hip-adduction-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Hip Adduction"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Hip Angles_Y",
+				"title": "Left Hip Adduction"
+			},
+			{
+				"y": "Right Hip Angles_Y",
+				"title": "Right Hip Adduction"
+			}
+		]
+	},
+	{
+		"id": "hip-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Hip Internal Rotation"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Hip Angles_Z",
+				"title": "Left Hip Rotation"
+			},
+			{
+				"y": "Right Hip Angles_Z",
+				"title": "Right Hip Rotation"
+			}
+		]
+	},
+	{
+		"id": "knee-flexion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Knee Flexion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Knee Angles_X",
+				"title": "Left Knee Flexion"
+			},
+			{
+				"y": "Right Knee Angles_X",
+				"title": "Right Knee Flexion"
+			}
+		]
+	},
+	{
+		"id": "knee-adduction-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Knee Varus"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Knee Angles_Y",
+				"title": "Left Knee Adduction"
+			},
+			{
+				"y": "Right Knee Angles_Y",
+				"title": "Right Knee Adduction"
+			}
+		]
+	},
+	{
+		"id": "knee-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Knee Internal Rotation"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Knee Angles_Z",
+				"title": "Left Knee Rotation"
+			},
+			{
+				"y": "Right Knee Angles_Z",
+				"title": "Right Knee Rotation"
+			}
+		]
+	},
+	{
+		"id": "ankle-dorsiflexion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Ankle Dorsiflexion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Ankle Angles_X",
+				"title": "Left Ankle Dorsiflexion"
+			},
+			{
+				"y": "Right Ankle Angles_X",
+				"title": "Right Ankle Dorsiflexion"
+			}
+		]
+	},
+	{
+		"id": "ankle-inversion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Ankle Inversion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Ankle Angles_Y",
+				"title": "Left Ankle Inversion"
+			},
+			{
+				"y": "Right Ankle Angles_Y",
+				"title": "Right Ankle Inversion"
+			}
+		]
+	},
+	{
+		"id": "hip-flexion-vel-graph",
+		"inherits": "angular-velocity-timeseries",
+		"displayOptions": {
+			"title": "Hip Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Hip Angles_Vel_X",
+				"title": "Left Hip Flexion Velocity"
+			},
+			{
+				"y": "Right Hip Angles_Vel_X",
+				"title": "Right Hip Flexion Velocity"
+			}
+		]
+	},
+	{
+		"id": "knee-flexion-vel-graph",
+		"inherits": "angular-velocity-timeseries",
+		"displayOptions": {
+			"title": "Knee Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Knee Angles_Vel_X",
+				"title": "Left Knee Flexion Velocity"
+			},
+			{
+				"y": "Right Knee Angles_Vel_X",
+				"title": "Right Knee Flexion Velocity"
+			}
+		]
+	},
+	{
+		"id": "ankle-dorsiflexion-vel-graph",
+		"inherits": "angular-velocity-timeseries",
+		"displayOptions": {
+			"title": "Ankle Flexion Velocity"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Ankle Angles_Vel_X",
+				"title": "Left Ankle Flexion Velocity"
+			},
+			{
+				"y": "Right Ankle Angles_Vel_X",
+				"title": "Right Ankle Flexion Velocity"
+			}
+		]
+	},
+	{
+		"id": "lower-body-table",
+		"inherits": "base-table",
+		"dataLinks": [
+			{
+				"title": "",
+				"values": [
+					"text://Pelvis Anterior Tilt",
+					"text://Left Hip Flexion",
+					"text://Right Hip Flexion",
+					"text://Left Knee Flexion",
+					"text://Right Knee Flexion",
+					"text://Left Ankle Dorsiflexion",
+					"text://Right Ankle Dorsiflexion"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"Pelvis Tilt max",
+					"Left Hip Flex max",
+					"Right Hip Flex max",
+					"Left Knee Flex max",
+					"Right Knee Flex max",
+					"Left Ankle Flex max",
+					"Right Ankle Flex max"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			},
+			{
+				"title": "",
+				"values": [
+					"Pelvis Tilt min",
+					"Left Hip Flex min",
+					"Right Hip Flex min",
+					"Left Knee Flex min",
+					"Right Knee Flex min",
+					"Left Ankle Flex min",
+					"Right Ankle Flex min"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			},
+			{
+				"title": "",
+				"values": [
+					"Pelvis Tilt range",
+					"Left Hip Flex range",
+					"Right Hip Flex range",
+					"Left Knee Flex range",
+					"Right Knee Flex range",
+					"Left Ankle Flex range",
+					"Right Ankle Flex range"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			}
+		]
+	},
+	{
+		"id": "thorax-lab-tilt-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Anterior Tilt wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_X",
+				"title": "Thorax-Lab Tilt"
+			}
+		]
+	},
+	{
+		"id": "thorax-lab-obliquity-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Up Obliquity wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_Y",
+				"title": "Thorax-Lab Obliquity"
+			}
+		]
+	},
+	{
+		"id": "thorax-lab-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Rotation wrt Lab"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Lab_Z",
+				"title": "Thorax-Lab Rotation"
+			}
+		]
+	},
+	{
+		"id": "thorax-pelvis-tilt-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Anterior Tilt wrt Pelvis"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_X",
+				"title": "Thorax-Pelvis Tilt"
+			}
+		]
+	},
+	{
+		"id": "thorax-pelvis-obliquity-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Up Obliquity wrt Pelvis"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Y",
+				"title": "Thorax-Pelvis Obliquity"
+			}
+		]
+	},
+	{
+		"id": "thorax-pelvis-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Thorax Internal Rotation wrt Pelvis"
+		},
+		"dataLinks": [
+			{
+				"y": "Thorax Angles_Z",
+				"title": "Thorax-Pelvis Rotation"
+			}
+		]
+	},
+	{
+		"id": "shoulder-flexion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Shoulder Flexion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Shoulder Angles_X",
+				"title": "Left Shoulder Flexion"
+			},
+			{
+				"y": "Right Shoulder Angles_X",
+				"title": "Right Shoulder Flexion"
+			}
+		]
+	},
+	{
+		"id": "shoulder-adduction-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Shoulder Adduction"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Shoulder Angles_Y",
+				"title": "Left Shoulder Adduction"
+			},
+			{
+				"y": "Right Shoulder Angles_Y",
+				"title": "Right Shoulder Adduction"
+			}
+		]
+	},
+	{
+		"id": "shoulder-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Shoulder Internal Rotation"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Shoulder Angles_Z",
+				"title": "Left Shoulder Rotation"
+			},
+			{
+				"y": "Right Shoulder Angles_Z",
+				"title": "Right Shoulder Rotation"
+			}
+		]
+	},
+	{
+		"id": "elbow-flexion-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Elbow Flexion"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Elbow Angles_X",
+				"title": "Left Elbow Flexion"
+			},
+			{
+				"y": "Right Elbow Angles_X",
+				"title": "Right Elbow Flexion"
+			}
+		]
+	},
+	{
+		"id": "elbow-rotation-graph",
+		"inherits": "base-timeseries",
+		"displayOptions": {
+			"title": "Elbow Internal Rotation"
+		},
+		"dataLinks": [
+			{
+				"y": "Left Elbow Angles_Z",
+				"title": "Left Elbow Rotation"
+			},
+			{
+				"y": "Right Elbow Angles_Z",
+				"title": "Right Elbow Rotation"
+			}
+		]
+	},
+	{
+		"id": "upper-body-table",
+		"inherits": "base-table",
+		"dataLinks": [
+			{
+				"title": "",
+				"values": [
+					"text://Thorax Anterior Tilt",
+					"text://Left Shoulder Flexion",
+					"text://Right Shoulder Flexion",
+					"text://Left Elbow Flexion",
+					"text://Right Elbow Flexion",
+					"text://Left Wrist Flexion",
+					"text://Right Wrist Flexion",
+					"text://Head Flexion"
+				]
+			},
+			{
+				"title": "",
+				"values": [
+					"Thorax Forward Tilt max",
+					"Left Shoulder Flex max",
+					"Right Shoulder Flex max",
+					"Left Elbow Flex max",
+					"Right Elbow Flex max",
+					"Left Wrist Flex max",
+					"Right Wrist Flex max",
+					"Head Forward Tilt max"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			},
+			{
+				"title": "",
+				"values": [
+					"Thorax Forward Tilt min",
+					"Left Shoulder Flex min",
+					"Right Shoulder Flex min",
+					"Left Elbow Flex min",
+					"Right Elbow Flex min",
+					"Left Wrist Flex min",
+					"Right Wrist Flex min",
+					"Head Forward Tilt min"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			},
+			{
+				"title": "",
+				"values": [
+					"Thorax Forward Tilt range",
+					"Left Shoulder Flex range",
+					"Right Shoulder Flex range",
+					"Left Elbow Flex range",
+					"Right Elbow Flex range",
+					"Left Wrist Flex range",
+					"Right Wrist Flex range",
+					"Head Forward Tilt range"
+				],
+				"aggregate": [
+					"mean",
+					"stddev"
+				],
+				"unit": "°"
+			}
+		]
+	}
+]

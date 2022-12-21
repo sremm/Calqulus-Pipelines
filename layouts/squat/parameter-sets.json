@@ -1,0 +1,313 @@
+[
+	{
+		"class": "top-level-section-no-modes",
+		"editable": true,
+		"id": "metrics-tables",
+		"title": "Metrics",
+		"children": [
+			{
+				"class": "tables",
+				"id": "jump-metrics-tables",
+				"editable": true,
+				"title": "",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "metrics-tables"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"class": "top-level-section",
+		"editable": true,
+		"id": "lower-body-kinematics",
+		"title": "Lower Body Kinematics",
+		"children": [
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "knee-trajectory-frontal",
+				"title": "Knee Movement seen from the front",
+				"children": [
+					{
+						"id": "knee-trajectory-frontal-graph"
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-kinematics-pelvis",
+				"title": "Pelvis Angles",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "pelvic-tilt-graph"
+							},
+							{
+								"id": "pelvic-obliquity-graph"
+							},
+							{
+								"id": "pelvic-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-position-pelvis",
+				"title": "Pelvis Position",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "pelvic-x-graph"
+							},
+							{
+								"id": "pelvic-y-graph"
+							},
+							{
+								"id": "pelvic-z-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-velocity-pelvis",
+				"title": "Pelvis Velocity",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "dummy"
+							},
+							{
+								"id": "dummy"
+							},
+							{
+								"id": "pelvic-vel-z-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-kinematics-hips",
+				"title": "Hip",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "hip-flexion-graph"
+							},
+							{
+								"id": "hip-adduction-graph"
+							},
+							{
+								"id": "hip-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-kinematics-knee",
+				"title": "Knee",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "knee-flexion-graph"
+							},
+							{
+								"id": "knee-adduction-graph"
+							},
+							{
+								"id": "knee-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-kinematics-ankle",
+				"title": "Ankle",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "ankle-dorsiflexion-graph"
+							},
+							{
+								"id": "ankle-inversion-graph"
+							},
+							{
+								"id": "ankle-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "lower-body-angular-velocities",
+				"title": "Angular Velocities - Frontal Plane",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "hip-flexion-vel-graph"
+							},
+							{
+								"id": "knee-flexion-vel-graph"
+							},
+							{
+								"id": "ankle-dorsiflexion-vel-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "collapsable-tables",
+				"id": "lower-body-tables",
+				"editable": true,
+				"title": "",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "lower-body-table"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		"class": "top-level-section",
+		"editable": true,
+		"id": "upper-body-kinematics",
+		"title": "Upper Body Kinematics",
+		"children": [
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "upper-body-kinematics-thorax-lab",
+				"title": "Thorax",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "thorax-lab-tilt-graph"
+							},
+							{
+								"id": "thorax-lab-obliquity-graph"
+							},
+							{
+								"id": "thorax-lab-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "upper-body-kinematics-thorax",
+				"title": "Thorax",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "thorax-pelvis-tilt-graph"
+							},
+							{
+								"id": "thorax-pelvis-obliquity-graph"
+							},
+							{
+								"id": "thorax-pelvis-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "upper-body-kinematics-shoulder",
+				"title": "Shoulder",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "shoulder-flexion-graph"
+							},
+							{
+								"id": "shoulder-adduction-graph"
+							},
+							{
+								"id": "shoulder-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "base-section",
+				"editable": true,
+				"id": "upper-body-kinematics-elbow",
+				"title": "Elbow",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "elbow-flexion-graph"
+							},
+							{
+								"id": "dummy"
+							},
+							{
+								"id": "elbow-rotation-graph"
+							}
+						]
+					}
+				]
+			},
+			{
+				"class": "collapsable-tables",
+				"id": "upper-body-tables",
+				"editable": true,
+				"title": "",
+				"children": [
+					{
+						"children": [
+							{
+								"id": "upper-body-table"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]
