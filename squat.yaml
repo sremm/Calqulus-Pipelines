@@ -156,6 +156,7 @@
   steps:
     - import: Right Knee Angles
 
+# velocity
 - parameter: Left Knee Angles_Vel
   where: 
     name: '!Static*'
@@ -172,6 +173,7 @@
     - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
     - multiply: [$prev, [1, 1, 1]]
 
+# position
 - parameter: Left Knee_Position
   where:
     name: '!Static*'
@@ -185,6 +187,13 @@
       from: mm
       to: m
 
+- parameter: Left Knee_Position_left
+  where:
+    name: '*Left*'
+  set: left
+  steps:
+    - import: Left Knee_Position
+    
 - parameter: Right Knee_Position
   where:
     name: '!Static*'
@@ -197,6 +206,13 @@
     - convert: $prev
       from: mm
       to: m
+
+- parameter: Right Knee_Position_right
+  where:
+    name: '*Right*'
+  set: Right
+  steps:
+    - import: Right Knee_Position
 
 # --- Ankle ---
 
