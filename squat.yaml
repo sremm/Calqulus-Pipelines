@@ -423,7 +423,7 @@
 ## Metrics ##
 #############
 
-- parameter: depth_of_movement
+- parameter: depth_of_movement_all
   where: 
     name: '!Static*'
   steps:
@@ -431,6 +431,24 @@
    - convert: $prev
      from: mm
      to: m
+
+- parameter: depth_of_movement_left
+  where: 
+    name: '*Left*'
+  steps:
+   - import: depth_of_movement_all
+
+- parameter: depth_of_movement_right
+  where: 
+    name: '*Right*'
+  steps:
+   - import: depth_of_movement_all
+
+- parameter: depth_of_movement
+  where: 
+    name: '!*Right*'
+  steps:
+   - import: depth_of_movement_all
 
 # Find global maximum/minimum/range
 
