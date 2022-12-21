@@ -9,8 +9,7 @@
 		"displayOptions": {
 			"stacking": "vertical",
 			"modeButtons": [
-				"consistency",
-				"mean"
+				"consistency"
 			],
 			"expand": "max-sidebar"
 		},
@@ -34,7 +33,6 @@
 			"precision": 2,
 			"annotations": true,
 			"modes": [
-				"mean",
 				"consistency"
 			],
 			"expand": "max-sidebar"
