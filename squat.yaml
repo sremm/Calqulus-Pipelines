@@ -446,7 +446,7 @@
 
 - parameter: depth_of_movement
   where: 
-    name: '!*Right*'
+    name: ['!*Right*','!*Left*']
   steps:
    - import: depth_of_movement_all
 
