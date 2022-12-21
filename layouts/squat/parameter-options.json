@@ -313,12 +313,12 @@
 		},
 		"dataLinks": [
 			{
-				"x": "Left Knee_Position_X",
-				"y": "Left Knee_Position_Z"
+				"x": "Left Knee_Position_left_X",
+				"y": "Left Knee_Position_left_Z"
 			},
 			{
-				"x": "Right Knee_Position_X",
-				"y": "Right Knee_Position_Z"
+				"x": "Right Knee_Position_right_X",
+				"y": "Right Knee_Position_right_Z"
 			}
 		]
 	},
@@ -472,11 +472,11 @@
 		},
 		"dataLinks": [
 			{
-				"y": "Left Knee Angles_X",
+				"y": "Left Knee Angles_left_X",
 				"title": "Left Knee Flexion"
 			},
 			{
-				"y": "Right Knee Angles_X",
+				"y": "Right Knee Angles_right_X",
 				"title": "Right Knee Flexion"
 			}
 		]
