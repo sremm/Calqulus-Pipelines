@@ -423,6 +423,7 @@
 ## Metrics ##
 #############
 
+# depth of movement
 - parameter: depth_of_movement_all
   where: 
     name: '!Static*'
@@ -450,7 +451,87 @@
   steps:
    - import: depth_of_movement_all
 
-# Find global maximum/minimum/range
+# contraction time
+- parameter: contraction_time_all
+  where:
+    name: '!Static*'
+  steps:
+    - eventDuration: [StartOfEccentric, EndOfConcentric]
+
+- parameter: contraction_time_left
+  where: 
+    name: '*Left*'
+  steps:
+    - import: contraction_time_all
+
+- parameter: contraction_time_right
+  where: 
+    name: '*Right*'
+  steps:
+    - import: contraction_time_all
+
+- parameter: contraction_time
+  where: 
+    name: '!*(Right|Left)*'
+  steps:
+   - import: contraction_time_all
+
+# eccentric time
+
+- parameter: eccentric_time_all
+  where:
+    name: '!Static*'
+  steps:
+    - eventDuration: [StartOfEccentric, StartOfConcentric]
+
+- parameter: eccentric_time_left
+  where: 
+    name: '*Left*'
+  steps:
+    - import: eccentric_time_all
+
+- parameter: eccentric_time_right
+  where: 
+    name: '*Right*'
+  steps:
+    - import: eccentric_time_all
+
+- parameter: eccentric_time
+  where: 
+    name: '!*(Right|Left)*'
+  steps:
+   - import: eccentric_time_all
+   
+
+# concentric time
+
+- parameter: concentric_time_all
+  where:
+    name: '!Static*'
+  steps:
+    - eventDuration: [StartOfConcentric, EndOfConcentric]
+
+- parameter: concentric_time_left
+  where: 
+    name: '*Left*'
+  steps:
+    - import: concentric_time_all
+
+- parameter: concentric_time_right
+  where: 
+    name: '*Right*'
+  steps:
+    - import: concentric_time_all
+
+- parameter: concentric_time
+  where: 
+    name: '!*(Right|Left)*'
+  steps:
+   - import: concentric_time_all
+  
+
+
+### Find global maximum/minimum/range
 
 # Pelvis
 - parameter: Pelvis Tilt max
