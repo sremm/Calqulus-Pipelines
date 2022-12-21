@@ -81,10 +81,10 @@
   where:
     name: '!Static*'
   steps:
-    # - convert: Pelvis_Position
-    #   from: mm
-    #   to: m
-    - velocity: Pelvis_Position
+    - convert: Pelvis_Position => pelvis_meters
+      from: mm
+      to: m
+    - velocity: pelvis_meters
     - lowpass: $prev
       extrapolate: 100
       order: 6
@@ -332,36 +332,6 @@
 ## EVENTS ##
 ############
 
-
-- event: PelvisVelDownEvent03
-  where: 
-    name: '!Static*'
-  steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.3
-     direction: down
-
-- event: PelvisVelDownEvent
-  where: 
-    name: '!Static*'
-  steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.1
-     direction: down
-   - refineEvent: $prev
-     sequence: [$prev, PelvisVelDownEvent03]
-
-- event: PelvisVelUpEvent
-  where: 
-    name: '!Static*'
-  steps:
-   - threshold: Pelvis_Velocity.z
-     direction: up
-     value: 0
-
-
 - parameter: filtered_inverted_pelvis_z
   steps:
     - negate: Pelvis_Position.z => pelvis_pos_inv
@@ -385,33 +355,67 @@
       height: 0.1
     # - min:
 
+- event: StartOfConcentric
+  where: 
+    name: '!Static*'
+  steps:
+   - import: PelvisPosValleyEvent
+
+- event: PelvisVelDownEvent03
+  where: 
+    name: '!Static*'
+  steps:
+   - import: Pelvis_Velocity.z => pelvis_vel
+   - threshold: Pelvis_Velocity.z
+     value: -0.03
+     direction: down
+
+- event: PelvisVelDownEvent
+  where: 
+    name: '!Static*'
+  steps:
+   - import: Pelvis_Velocity.z => pelvis_vel
+   - threshold: Pelvis_Velocity.z
+     value: -0.01
+     direction: down
+   - refineEvent: $prev
+     sequence: [$prev, PelvisVelDownEvent03]
+
 - event: StartOfEccentric
   where: 
     name: '!Static*'
   steps:
    - refineEvent: PelvisVelDownEvent
-     sequence: [PelvisVelDownEvent, PelvisVelUpEvent]
+     sequence: [PelvisVelDownEvent, StartOfConcentric]
      cyclic: false
-   - refineEvent: $prev
-     sequence: [$prev, PelvisVelUpEvent]
-     cyclic: false
-     
 
-
-- event: StartOfConcentric
+- event: PelvisVelPeak
   where: 
     name: '!Static*'
   steps:
-   - refineEvent: PelvisPosValleyEvent
-     sequence: [StartOfEccentric, PelvisPosValleyEvent]
-     cyclic: false
+   - import: Pelvis_Velocity.z => pelvis_vel
+   - peakFinder: pelvis_vel
+     width: 5
+     distance: 100
+     height: 0.1
+
+- event: PelvisVelDown0Event
+  where: 
+    name: '!Static*'
+  steps:
+   - import: Pelvis_Velocity.z => pelvis_vel
+   - threshold: Pelvis_Velocity.z
+     value: 0
+     direction: down
+   - refineEvent: 
+     sequence: [PelvisVelPeak, $prev]
 
 - event: EndOfConcentric
   where: 
     name: '!Static*'
   steps:
-   - refineEvent: PelvisVelUpEvent
-     sequence: [StartOfEccentric, PelvisVelUpEvent]
+   - refineEvent: PelvisVelDown0Event
+     sequence: [StartOfEccentric, StartOfConcentric, PelvisVelDown0Event]
      cyclic: false
 
 
