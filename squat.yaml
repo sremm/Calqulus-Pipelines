@@ -444,7 +444,7 @@
     name: '!Static*'
   steps:
    - refineEvent: PelvisVelDown0Event
-     sequence: [StartOfEccentric, StartOfConcentric, PelvisVelDown0Event]
+     sequence: [StartOfConcentric, PelvisVelDown0Event]
      cyclic: false
 
 
