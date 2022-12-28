@@ -1,11 +1,11 @@
 # A pipeline is written in YAML and instructs the Calqulus processing engine what to calculate.
 # In order to process this pipeline, skeleton must be solved in QTM first.
 
-# A pipeline consists of any number of base nodes defined on the root level. 
+# A pipeline consists of any number of base nodes defined on the root level.
 
 # Output nodes define an end result that is exported to the global scope and exported in the resulting JSON file.
 # Output node can be 'event' or 'parameter'
-# The main difference between the parameter and event is what type of data is stored. 
+# The main difference between the parameter and event is what type of data is stored.
 # A parameter node will store series and scalar data, whereas an event node will store event data.
 
 # Space node defines custom coordinate systems. It is useful when orientation of subject changes
@@ -28,18 +28,18 @@
 
 # An event node defines steps used to calculate an event.
 # An event is a label that describes one or more points in time.
-# Events can be used in both event and parameter calculations, as well as for normalization by the reporting framework. 
+# Events can be used in both event and parameter calculations, as well as for normalization by the reporting framework.
 # The resulting event is exported to the global scope and exported in the resulting JSON file.
 
 - event: BOF
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: [0]
-  
+
 - event: EOF
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: [$length]
 
@@ -53,22 +53,22 @@
 
 - parameter: Pelvic Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
       space: VirtualLab # calculate angle relative to virtual lab
     - multiply: [$prev, [-1, 1, 1]] # invert first component of output
-  
+
 - parameter: Pelvis_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
-    - segment: Hips 
+    - segment: Hips
       space: VirtualLab
 
 - parameter: Pelvis_Position_Norm_To_Start
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - import: Pelvis_Position
     - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
@@ -78,7 +78,7 @@
 
 - parameter: Pelvis_Velocity
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - convert: Pelvis_Position => pelvis_meters
       from: mm
@@ -88,13 +88,12 @@
       extrapolate: 100
       order: 6
       cutoff: 5
-    
 
 # --- Hips ---
 
 - parameter: Left Hip Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [Hips, LeftUpLeg] # when two segments are specified, joint angle between the segments is calculated
@@ -102,22 +101,22 @@
 
 - parameter: Right Hip Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [Hips, RightUpLeg]
 
 - parameter: Left Hip Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [Hips, LeftUpLeg, Hips, LeftUpLeg]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Hip Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [Hips, RightUpLeg, Hips, RightUpLeg]
@@ -127,7 +126,7 @@
 
 - parameter: Left Knee Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftUpLeg, LeftLeg]
@@ -135,39 +134,39 @@
     - multiply: [$prev, [-1, -1, -1]]
 
 - parameter: Left Knee Angles_left
-  where: 
-    name: '*Left*'
+  where:
+    name: "*Left*"
   set: left
   steps:
     - import: Left Knee Angles
 
 - parameter: Right Knee Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightUpLeg, RightLeg]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Knee Angles_right
-  where: 
-    name: '*Right*'
+  where:
+    name: "*Right*"
   set: right
   steps:
     - import: Right Knee Angles
 
 # velocity
 - parameter: Left Knee Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [LeftUpLeg, LeftLeg, LeftUpLeg, LeftLeg]
     - multiply: [$prev, [1, 1, 1]]
 
 - parameter: Right Knee Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [RightUpLeg, RightLeg, RightUpLeg, RightLeg]
@@ -176,10 +175,10 @@
 # position
 - parameter: Left Knee_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
-    - segment: LeftLeg 
+    - segment: LeftLeg
       space: VirtualLab
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [-1, 1, 1]]
@@ -189,17 +188,17 @@
 
 - parameter: Left Knee_Position_left
   where:
-    name: '*Left*'
+    name: "*Left*"
   set: left
   steps:
     - import: Left Knee_Position
-    
+
 - parameter: Right Knee_Position
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
-    - segment: RightLeg 
+    - segment: RightLeg
       space: VirtualLab
     - subtract: [$prev, Pelvis_Position@StartOfEccentric]
     - multiply: [$prev, [-1, 1, 1]]
@@ -209,7 +208,7 @@
 
 - parameter: Right Knee_Position_right
   where:
-    name: '*Right*'
+    name: "*Right*"
   set: right
   steps:
     - import: Right Knee_Position
@@ -224,23 +223,23 @@
 
 - parameter: Right Ankle Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightLeg, RightFoot]
     - multiply: [$prev, [1, 1, -1]]
 
 - parameter: Left Ankle Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: left
   steps:
     - angularVelocity: [LeftLeg, LeftFoot, LeftLeg, LeftFoot]
     - multiply: [$prev, [-1, 1, 1]]
 
 - parameter: Right Ankle Angles_Vel
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   set: right
   steps:
     - angularVelocity: [RightLeg, RightFoot, RightLeg, RightFoot]
@@ -250,7 +249,7 @@
 - parameter: Left Toe Base_Position
   set: left
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - segment: LeftToeBase
       space: VirtualLab
@@ -258,7 +257,7 @@
 - parameter: Right Toe Base_Position
   set: right
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - segment: RightToeBase
       space: VirtualLab
@@ -266,30 +265,29 @@
 - parameter: Left Toe Base_Velocity
   set: left
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - velocity: Left Toe Base_Position
-  
+
 - parameter: Right Toe Base_Velocity
   set: right
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - velocity: Right Toe Base_Position
-      
 
 # --- Thorax ---
 
 - parameter: Thorax Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: [Hips, Spine2]
     - multiply: [$prev, [-1, -1, 1]]
 
 - parameter: Thorax Angles_Lab
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: Spine2
       space: VirtualLab # calculate angle relative to virtual lab
@@ -299,7 +297,7 @@
 
 - parameter: Left Shoulder Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [Spine2, LeftArm]
@@ -307,7 +305,7 @@
 
 - parameter: Right Shoulder Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [Spine2, RightArm]
@@ -317,7 +315,7 @@
 
 - parameter: Left Elbow Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftArm, LeftForeArm]
@@ -325,7 +323,7 @@
 
 - parameter: Right Elbow Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightArm, RightForeArm]
@@ -334,7 +332,7 @@
 
 - parameter: Left Wrist Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: left
   steps:
     - angle: [LeftForeArm, LeftHand]
@@ -342,7 +340,7 @@
 
 - parameter: Right Wrist Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   set: right
   steps:
     - angle: [RightForeArm, RightHand]
@@ -352,10 +350,9 @@
 
 - parameter: Head Angles
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - angle: [Head, Spine2]
-
 
 ############
 ## EVENTS ##
@@ -375,78 +372,77 @@
       to: m
 
 - event: PelvisPosValleyEvent
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
     - peakFinder: filtered_inverted_pelvis_z
       width: 5
-      distance: 100
+      distance: 40
       height: 0.1
     # - min:
 
 - event: StartOfConcentric
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: PelvisPosValleyEvent
+    - import: PelvisPosValleyEvent
 
 - event: PelvisVelDownEvent03
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.03
-     direction: down
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - threshold: Pelvis_Velocity.z
+      value: -0.03
+      direction: down
 
 - event: PelvisVelDownEvent
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: -0.01
-     direction: down
-   - refineEvent: $prev
-     sequence: [$prev, PelvisVelDownEvent03]
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - threshold: Pelvis_Velocity.z
+      value: -0.01
+      direction: down
+    - refineEvent: $prev
+      sequence: [$prev, PelvisVelDownEvent03]
 
 - event: StartOfEccentric
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - refineEvent: PelvisVelDownEvent
-     sequence: [PelvisVelDownEvent, StartOfConcentric]
-     cyclic: false
+    - refineEvent: PelvisVelDownEvent
+      sequence: [PelvisVelDownEvent, StartOfConcentric]
+      cyclic: false
 
 - event: PelvisVelPeak
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - peakFinder: pelvis_vel
-     width: 5
-     distance: 100
-     height: 0.1
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - peakFinder: pelvis_vel
+      width: 5
+      distance: 40
+      height: 0.1
 
 - event: PelvisVelDown0Event
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - import: Pelvis_Velocity.z => pelvis_vel
-   - threshold: Pelvis_Velocity.z
-     value: 0
-     direction: down
-   - refineEvent: 
-     sequence: [PelvisVelPeak, $prev]
+    - import: Pelvis_Velocity.z => pelvis_vel
+    - threshold: Pelvis_Velocity.z
+      value: 0
+      direction: down
+    - refineEvent:
+      sequence: [PelvisVelPeak, $prev]
 
 - event: EndOfConcentric
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - refineEvent: PelvisVelDown0Event
-     sequence: [StartOfConcentric, PelvisVelDown0Event]
-     cyclic: false
-
+    - refineEvent: PelvisVelDown0Event
+      sequence: [StartOfConcentric, PelvisVelDown0Event]
+      cyclic: false
 
 #############
 ## Metrics ##
@@ -454,107 +450,109 @@
 
 # depth of movement
 - parameter: depth_of_movement_all
-  where: 
-    name: '!Static*'
+  where:
+    name: "!Static*"
   steps:
-   - subtract: [Pelvis_Position.z@StartOfEccentric, Pelvis_Position.z@StartOfConcentric]
-   - convert: $prev
-     from: mm
-     to: m
+    - subtract:
+        [
+          Pelvis_Position.z@StartOfEccentric,
+          Pelvis_Position.z@StartOfConcentric,
+        ]
+    - convert: $prev
+      from: mm
+      to: m
 
 - parameter: depth_of_movement_left
-  where: 
-    name: '*Left*'
+  where:
+    name: "*Left*"
   steps:
-   - import: depth_of_movement_all
+    - import: depth_of_movement_all
 
 - parameter: depth_of_movement_right
-  where: 
-    name: '*Right*'
+  where:
+    name: "*Right*"
   steps:
-   - import: depth_of_movement_all
+    - import: depth_of_movement_all
 
 - parameter: depth_of_movement
-  where: 
-    name: '!*(Right|Left)*'
+  where:
+    name: "!*(Right|Left)*"
   steps:
-   - import: depth_of_movement_all
+    - import: depth_of_movement_all
 
 # contraction time
 - parameter: contraction_time_all
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - eventDuration: [StartOfEccentric, EndOfConcentric]
 
 - parameter: contraction_time_left
-  where: 
-    name: '*Left*'
+  where:
+    name: "*Left*"
   steps:
     - import: contraction_time_all
 
 - parameter: contraction_time_right
-  where: 
-    name: '*Right*'
+  where:
+    name: "*Right*"
   steps:
     - import: contraction_time_all
 
 - parameter: contraction_time
-  where: 
-    name: '!*(Right|Left)*'
+  where:
+    name: "!*(Right|Left)*"
   steps:
-   - import: contraction_time_all
+    - import: contraction_time_all
 
 # eccentric time
 
 - parameter: eccentric_time_all
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - eventDuration: [StartOfEccentric, StartOfConcentric]
 
 - parameter: eccentric_time_left
-  where: 
-    name: '*Left*'
+  where:
+    name: "*Left*"
   steps:
     - import: eccentric_time_all
 
 - parameter: eccentric_time_right
-  where: 
-    name: '*Right*'
+  where:
+    name: "*Right*"
   steps:
     - import: eccentric_time_all
 
 - parameter: eccentric_time
-  where: 
-    name: '!*(Right|Left)*'
+  where:
+    name: "!*(Right|Left)*"
   steps:
-   - import: eccentric_time_all
-   
+    - import: eccentric_time_all
 
 # concentric time
 
 - parameter: concentric_time_all
   where:
-    name: '!Static*'
+    name: "!Static*"
   steps:
     - eventDuration: [StartOfConcentric, EndOfConcentric]
 
 - parameter: concentric_time_left
-  where: 
-    name: '*Left*'
+  where:
+    name: "*Left*"
   steps:
     - import: concentric_time_all
 
 - parameter: concentric_time_right
-  where: 
-    name: '*Right*'
+  where:
+    name: "*Right*"
   steps:
     - import: concentric_time_all
 
 - parameter: concentric_time
-  where: 
-    name: '!*(Right|Left)*'
+  where:
+    name: "!*(Right|Left)*"
   steps:
-   - import: concentric_time_all
-  
+    - import: concentric_time_all

@@ -359,9 +359,8 @@
   steps:
     - peakFinder: Pelvis_Velocity.z
       width: 6
-      distance: 100
+      distance: 40
       height: 0.5
-    - min:
 
 - event: Touchdown
   where:
@@ -370,11 +369,8 @@
     - negate: Pelvis_Velocity.z => pelvis_vel_inv
     - peakFinder: pelvis_vel_inv
       width: 6
-      distance: 100
+      distance: 40
       height: 0.5
-    - max:
-  #  - min: Pelvis_Velocity.z
-  #    frames: true
 
 - event: PelvisVelDownEvent03
   where:
