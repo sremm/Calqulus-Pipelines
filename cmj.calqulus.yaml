@@ -67,12 +67,19 @@
     - segment: Hips
       space: VirtualLab
 
+
+- event: first_start_of_eccentric
+  where:
+    name: "!Static*"
+  steps:
+    - min: StartOfEccentric => first_start
+
 - parameter: Pelvis_Position_Norm_To_Start
   where:
     name: "!Static*"
   steps:
     - import: Pelvis_Position
-    - subtract: [Pelvis_Position, Pelvis_Position@StartOfEccentric]
+    - subtract: [Pelvis_Position, Pelvis_Position@first_start_of_eccentric]
     - convert: $prev
       from: mm
       to: m
@@ -353,16 +360,34 @@
 #   steps:
 #     - mean: [Takeoff_right, Takeoff_left]
 
-- event: Takeoff
+- event: pelvis_pos_peaks
+  where:
+    name: "!Static*"
+  steps:
+    - import: Pelvis_Position_Norm_To_Start.z => pelvis_pos
+    - peakFinder: pelvis_pos
+      width: 6
+      distance: 40
+      height: 0.5
+
+- event: pelvis_vel_peaks # pelvis_vel_peaks
   where:
     name: "!Static*"
   steps:
     - peakFinder: Pelvis_Velocity.z
       width: 6
       distance: 40
-      height: 0.5
+      height: 1.5
 
-- event: Touchdown
+- event: Takeoff
+  where:
+    name: "!Static*"
+  steps:
+    - refineEvent: pelvis_vel_peaks
+      sequence: [pelvis_vel_peaks] # for some reason adding [pelvis_vel_peaks, pelvis_pos_peaks] causes calqulus to get stuck in some loop that runs out of memory
+      cyclic: false
+
+- event: pelvis_vel_valleys
   where:
     name: "!Static*"
   steps:
@@ -371,6 +396,14 @@
       width: 6
       distance: 40
       height: 0.5
+
+- event: Touchdown
+  where:
+    name: "!Static*"
+  steps:
+    - refineEvent: pelvis_vel_valleys
+      sequence: [pelvis_pos_peaks, pelvis_vel_valleys]
+      cyclic: false
 
 - event: PelvisVelDownEvent03
   where:
