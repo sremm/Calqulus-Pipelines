@@ -360,6 +360,15 @@
 #   steps:
 #     - mean: [Takeoff_right, Takeoff_left]
 
+- parameter: PelvisVelocityFiltered
+  where:
+    name: "!Static*"
+  steps:
+    - lowpass: Pelvis_Velocity
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+
 - event: pelvis_pos_peaks
   where:
     name: "!Static*"
@@ -374,7 +383,11 @@
   where:
     name: "!Static*"
   steps:
-    - peakFinder: Pelvis_Velocity.z
+    - lowpass: PelvisVelocityFiltered.z
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+    - peakFinder: $prev
       width: 6
       distance: 40
       height: 1.5
@@ -391,7 +404,7 @@
   where:
     name: "!Static*"
   steps:
-    - negate: Pelvis_Velocity.z => pelvis_vel_inv
+    - negate: PelvisVelocityFiltered.z => pelvis_vel_inv
     - peakFinder: pelvis_vel_inv
       width: 6
       distance: 40
@@ -409,8 +422,8 @@
   where:
     name: "!Static*"
   steps:
-    - import: Pelvis_Velocity.z => pelvis_vel
-    - threshold: Pelvis_Velocity.z
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - threshold: pelvis_vel
       value: -0.3
       direction: down
 
@@ -418,8 +431,8 @@
   where:
     name: "!Static*"
   steps:
-    - import: Pelvis_Velocity.z => pelvis_vel
-    - threshold: Pelvis_Velocity.z
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - threshold: pelvis_vel
       value: -0.1
       direction: down
     - refineEvent: $prev
@@ -429,7 +442,7 @@
   where:
     name: "!Static*"
   steps:
-    - threshold: Pelvis_Velocity.z
+    - threshold: PelvisVelocityFiltered.z
       direction: up
       value: 0
 
