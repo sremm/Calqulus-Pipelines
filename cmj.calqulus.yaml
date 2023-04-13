@@ -527,6 +527,65 @@
   steps:
     - divide: [flight_time, contraction_time]
 
+# Find local maximum of flexion angles between Start of Eccentric and Takeoff
+
+# Hips
+- parameter: Left Hip Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - import: Left Hip Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+
+- parameter: Right Hip Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - import: Right Hip Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+# Knees
+- parameter: Left Knee Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - import: Left Knee Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+
+- parameter: Right Knee Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - import: Right Knee Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+
+# Ankles
+- parameter: Left Ankle Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - import: Left Ankle Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+
+- parameter: Right Ankle Flex max before takeoff
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - import: Right Ankle Angles
+    - eventMask: [$prev, StartOfEccentric , Takeoff]
+    - max: $prev.x
+
+
 # Find global maximum/minimum/range
 
 # Pelvis
