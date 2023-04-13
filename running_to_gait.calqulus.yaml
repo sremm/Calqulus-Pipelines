@@ -104,6 +104,16 @@
       distance: 20
       height: 0.65
 
+- event: LHS # copy of LFS but renamed to LHS
+  set: left
+  where:
+    name: "!Static*"
+  steps:
+    - peakFinder: Left_ZENI_heel_diff
+      width: 3
+      distance: 20
+      height: 0.65
+
 - event: LTO
   set: left
   where:
@@ -172,6 +182,16 @@
       export: Right_ZENI_toe_diff_abs_inv
 
 - event: RFS
+  set: right
+  where:
+    name: "!Static*"
+  steps:
+    - peakFinder: Right_ZENI_heel_diff
+      width: 3
+      distance: 20
+      height: 0.65
+
+- event: RHS # copy of RFS but renamed to RHS
   set: right
   where:
     name: "!Static*"
