@@ -1,0 +1,412 @@
+# A pipeline is written in YAML and instructs the Calqulus processing engine what to calculate.
+# In order to process this pipeline, skeleton must be solved in QTM first.
+
+# A pipeline consists of any number of base nodes defined on the root level.
+
+# Output nodes define an end result that is exported to the global scope and exported in the resulting JSON file.
+# Output node can be 'event' or 'parameter'
+# The main difference between the parameter and event is what type of data is stored.
+# A parameter node will store series and scalar data, whereas an event node will store event data.
+
+# Space node defines custom coordinate systems. It is useful when orientation of subject changes
+# with regards to the global coordinate system, e.g. walking through lab in both directions.
+
+# Order of nodes is not important. They can be placed anywhere in YAML file.
+
+############
+## SPACES ##
+############
+
+# Create a space named VirtualLab, that is defined by the orientation of Hips (Pelvis) segment.
+- space: VirtualLab
+  alignWithSegment:
+    segment: Hips
+
+############
+## EVENTS ##
+############
+
+# An event node defines steps used to calculate an event.
+# An event is a label that describes one or more points in time.
+# Events can be used in both event and parameter calculations, as well as for normalization by the reporting framework.
+# The resulting event is exported to the global scope and exported in the resulting JSON file.
+
+# Create event at left knee maximum flexion
+- event: BOF
+  where:
+     name: "!Static*"
+  steps:
+    - import: [0]
+
+- event: EOF
+  where:
+     name: "!Static*"
+  steps:
+    - import: [$length]
+
+############
+## SERIES ##
+############
+
+# Calculating joint angles and positions
+
+# --- Pelvis ---
+
+- parameter: Pelvic Angles
+  where:
+     name: "!Static*"
+  steps:
+    - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
+      space: VirtualLab # calculate angle relative to virtual lab
+    - multiply: [$prev, [-1, 1, 1]] # invert first component of output
+
+- parameter: Pelvis_Position
+  where:
+     name: "!Static*"
+  steps:
+    - segment: Hips
+      space: VirtualLab
+
+- parameter: Pelvis_Velocity
+  where:
+     name: "!Static*"
+  steps:
+    - convert: Pelvis_Position
+      from: mm
+      to: m
+    - velocity: $prev
+
+- parameter: PelvisVelocityFiltered
+  where:
+    name: "!Static*"
+  steps:
+    - lowpass: Pelvis_Velocity
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+
+############
+## EVENTS ##
+############
+
+- event: Takeoff
+  where:
+     name: "!Static*"
+  steps:
+    - import: PelvisVelocityFiltered.z
+    - max: $prev
+      frames: true
+
+- event: Touchdown
+  where:
+     name: "!Static*"
+  steps:
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - min: pelvis_vel
+      frames: true
+    - refineEvent: $prev
+      sequence: [Takeoff, $prev]
+
+- event: PelvisVelDownEvent03
+  where:
+     name: "!Static*"
+  steps:
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - threshold: pelvis_vel
+      value: -0.1
+      direction: down
+
+- event: PelvisVelDownEvent
+  where:
+     name: "!Static*"
+  steps:
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - threshold: pelvis_vel
+      value: -0.05
+      direction: down
+    - refineEvent: $prev
+      sequence: [$prev, PelvisVelDownEvent03]
+
+- event: StartOfEccentric
+  where:
+     name: "!Static*"
+  steps:
+    - refineEvent: PelvisVelDownEvent
+      sequence: [PelvisVelDownEvent, Takeoff]
+      cyclic: false
+
+- event: PelvisZeroUpEvent
+  where:
+     name: "!Static*"
+  steps:
+    - import: PelvisVelocityFiltered.z => pelvis_vel
+    - threshold: pelvis_vel
+      value: 0.00
+      direction: up
+
+- event: StartOfConcentric
+  where:
+     name: "!Static*"
+  steps:
+    - refineEvent: PelvisZeroUpEvent
+      sequence: [StartOfEccentric, PelvisZeroUpEvent, Takeoff]
+      cyclic: false
+
+#############
+## Metrics ##
+#############
+
+## BILATERAL
+
+- parameter: jump_height_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
+      output: pelvis_z_during_flight
+    - max: pelvis_z_during_flight => pelvis_max_during_flight
+    - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
+    - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
+    - convert: $prev
+      from: mm
+      to: m
+  
+- parameter: countermovement_depth_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - subtract:
+        [
+          Pelvis_Position.z@StartOfEccentric,
+          Pelvis_Position.z@StartOfConcentric,
+        ]
+    - convert: $prev
+      from: mm
+      to: m
+
+- parameter: contraction_duration_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - eventDuration: [StartOfEccentric, Takeoff]
+
+- parameter: eccentric_duration_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - eventDuration: [StartOfEccentric, StartOfConcentric]
+
+- parameter: concentric_time_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - eventDuration: [StartOfConcentric, Takeoff]
+
+- parameter: flight_time_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - eventDuration: [Takeoff, Touchdown]
+
+- parameter: reactive_strength_index_modified_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - divide: [jump_height_bilateral, contraction_duration_bilateral]  
+
+- parameter: flight_time_contraction_time_ratio_bilateral
+  set: bilateral
+  where:
+     name: "!*(Right|Left)*"
+  steps:
+    - divide: [flight_time_bilateral, contraction_duration_bilateral]
+
+- event: eccentric_peak_velocity_bilateral
+  set: bilateral
+  where: 
+     name: "!*(Right|Left)*"
+  steps:
+    - lowpass: PelvisVelocityFiltered.z
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+    - eventMask: [$prev, StartOfEccentric, StartOfConcentric]
+    - max: $prev
+
+## LEFT
+
+- parameter: jump_height_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
+      output: pelvis_z_during_flight
+    - max: pelvis_z_during_flight => pelvis_max_during_flight
+    - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
+    - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
+    - convert: $prev
+      from: mm
+      to: m
+  
+- parameter: countermovement_depth_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - subtract:
+        [
+          Pelvis_Position.z@StartOfEccentric,
+          Pelvis_Position.z@StartOfConcentric,
+        ]
+    - convert: $prev
+      from: mm
+      to: m
+
+- parameter: contraction_duration_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - eventDuration: [StartOfEccentric, Takeoff]
+
+- parameter: eccentric_duration_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - eventDuration: [StartOfEccentric, StartOfConcentric]
+
+- parameter: concentric_time_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - eventDuration: [StartOfConcentric, Takeoff]
+
+- parameter: flight_time_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - eventDuration: [Takeoff, Touchdown]
+
+- parameter: reactive_strength_index_modified_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - divide: [jump_height_left, contraction_duration_left]
+
+- parameter: flight_time_contraction_time_ratio_left
+  set: left
+  where:
+     name: "*Left*"
+  steps:
+    - divide: [flight_time_left, contraction_duration_left]
+
+- event: eccentric_peak_velocity_left
+  set: left
+  where: 
+     name: "*Left*"
+  steps:
+    - lowpass: PelvisVelocityFiltered.z
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+    - eventMask: [$prev, StartOfEccentric, StartOfConcentric]
+    - max: $prev
+
+## RIGHT
+
+- parameter: jump_height_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - eventMask: [Pelvis_Position.z, Takeoff, Touchdown]
+      output: pelvis_z_during_flight
+    - max: pelvis_z_during_flight => pelvis_max_during_flight
+    - import: Pelvis_Position.z@StartOfEccentric => pelvis_at_start_of_eccentric
+    - subtract: [pelvis_max_during_flight, pelvis_at_start_of_eccentric]
+    - convert: $prev
+      from: mm
+      to: m
+  
+- parameter: countermovement_depth_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - subtract:
+        [
+          Pelvis_Position.z@StartOfEccentric,
+          Pelvis_Position.z@StartOfConcentric,
+        ]
+    - convert: $prev
+      from: mm
+      to: m
+
+- parameter: contraction_duration_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - eventDuration: [StartOfEccentric, Takeoff]
+
+- parameter: eccentric_duration_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - eventDuration: [StartOfEccentric, StartOfConcentric]
+
+- parameter: concentric_time_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - eventDuration: [StartOfConcentric, Takeoff]
+
+- parameter: flight_time_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - eventDuration: [Takeoff, Touchdown]
+
+- parameter: reactive_strength_index_modified_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - divide: [jump_height_right, contraction_duration_right]
+
+- parameter: flight_time_contraction_time_ratio_right
+  set: right
+  where:
+     name: "*Right*"
+  steps:
+    - divide: [flight_time_right, contraction_duration_right]
+
+- event: eccentric_peak_velocity_right
+  set: right
+  where: 
+     name: "*Right*"
+  steps:
+    - lowpass: PelvisVelocityFiltered.z
+      order: 2
+      cutoff: 6
+      extrapolate: 100
+    - eventMask: [$prev, StartOfEccentric, StartOfConcentric]
+    - max: $prev
+
+# # - parameter: eccentric_utilization_ratio
+# # jump height bilateral / jump height unilateral
