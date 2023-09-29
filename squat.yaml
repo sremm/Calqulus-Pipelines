@@ -556,3 +556,51 @@
     name: "!*(Right|Left)*"
   steps:
     - import: concentric_time_all
+
+# Ankle max angles
+- parameter: Left Ankle Flex max during squat_all
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - import: Left Ankle Angles
+    - eventMask: [$prev, StartOfEccentric , EndOfConcentric]
+    - max: $prev.x
+
+- parameter: Right Ankle Flex max during squat_all
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - import: Right Ankle Angles
+    - eventMask: [$prev, StartOfEccentric , EndOfConcentric]
+    - max: $prev.x
+
+
+- parameter: Left Ankle Flex max during squat
+  where:
+    name: "!*(Right|Left)*"
+  set: left
+  steps:
+    - import: Left Ankle Flex max during squat_all
+
+- parameter: Right Ankle Flex max during squat
+  where:
+    name: "!*(Right|Left)*"
+  set: right
+  steps:
+    - import: Right Ankle Flex max during squat_all
+
+- parameter: Left Ankle Flex max during squat_left
+  where:
+    name: "*Left*"
+  set: left
+  steps:
+    - import: Left Ankle Flex max during squat_all
+
+- parameter: Right Ankle Flex max during squat_right
+  where:
+    name: "*Right*"
+  set: right
+  steps:
+    - import: Right Ankle Flex max during squat_all
