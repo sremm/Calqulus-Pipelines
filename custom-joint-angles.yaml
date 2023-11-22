@@ -56,12 +56,9 @@
   where:
     name: "!Static*"
   steps:
-    - segment: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
+    - angle: Hips # angle is calculated relative to axes of global coordinate system, if only single input exists
       space: VirtualLab # calculate angle relative to virtual lab
-    # - multiply: [$prev, [-1, 1, 1]] # invert first component of output
-    - lowpass: $prev
-      cutoff: 5
-      order: 4
+    - multiply: [$prev, [-1, 1, 1]] # invert first component of output
 
 # --- Hips ---
 
@@ -183,6 +180,124 @@
     name: "!Static*"
   steps:
     - angle: [Head, Spine2]
+
+# Positions
+- parameter: Pelvis_Position
+  where:
+    name: "!Static*"
+  steps:
+    - segment: Hips
+      space: VirtualLab
+
+- parameter: Left Hip_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftUpLeg
+      space: VirtualLab
+
+- parameter: Right Hip_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightUpLeg
+      space: VirtualLab
+
+- parameter: Left Knee_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftLeg
+      space: VirtualLab
+
+- parameter: Right Knee_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightLeg
+      space: VirtualLab
+
+- parameter: Left Ankle_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftFoot
+      space: VirtualLab
+
+- parameter: Right Ankle_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightFoot
+      space: VirtualLab
+
+- parameter: Thorax_Position
+  where:
+    name: "!Static*"
+  steps:
+    - segment: Spine2
+      space: VirtualLab
+
+- parameter: Left Shoulder_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftArm
+      space: VirtualLab
+
+- parameter: Right Shoulder_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightArm
+      space: VirtualLab
+
+- parameter: Left Elbow_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftForeArm
+      space: VirtualLab
+
+- parameter: Right Elbow_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightForeArm
+      space: VirtualLab
+
+- parameter: Left Wrist_Position
+  where:
+    name: "!Static*"
+  set: left
+  steps:
+    - segment: LeftHand
+      space: VirtualLab
+
+- parameter: Right Wrist_Position
+  where:
+    name: "!Static*"
+  set: right
+  steps:
+    - segment: RightHand
+      space: VirtualLab
+
+- parameter: Head_Position
+  where:
+    name: "!Static*"
+  steps:
+    - segment: Head
+      space: VirtualLab
 
 
 #############
