@@ -36,6 +36,11 @@
 ############
 ## EVENTS ##
 ############
+
+- template: /templates/events-kinetics.calqulus.yaml
+  where:
+    force: any
+
 - event: PLOTSTART
   where: 
     name: Bowling*
@@ -152,6 +157,9 @@
 ############
 ## SERIES ##
 ############
+
+- template: /templates/timeseries.calqulus.yaml
+
 # Define body side
 # Find out which max hand linear velocity magnitude is higher
 - parameter: Left_Hand_Vel_max
@@ -481,13 +489,13 @@
   where:
     name: Bowling*
   steps:
-    - import: $field(Ball velocity in mps, measurement)
+    - import: $field(Ball velocity in mps; measurement)
 
 - parameter: HEIGHT
   where:
     name: Bowling*
   steps:
-    - import: $field(Height, measurement, numeric)
+    - import: $field(Height; measurement; numeric)
 
 ############
 ## METRICS ##
