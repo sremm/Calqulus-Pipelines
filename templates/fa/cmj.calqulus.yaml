@@ -653,6 +653,115 @@
   steps:
     - import: Right Thorax Angles@TouchDown
 
+# Other metrics - Angles @TakeOff
+- parameter: Left Knee Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Left Knee Angles@TakeOff
+
+- parameter: Right Knee Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Right Knee Angles@TakeOff
+
+- parameter: Left Hip Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Left Hip Angles@TakeOff
+
+- parameter: Right Hip Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Right Hip Angles@TakeOff
+
+- parameter: Left Thorax Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Left Thorax Angles@TakeOff
+
+- parameter: Right Thorax Angles@TakeOff_CMJ_B
+  where:
+    name: CMJ_B*
+  steps:
+    - import: Right Thorax Angles@TakeOff
+
+- parameter: Left Knee Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Left Knee Angles@TakeOff
+
+- parameter: Right Knee Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Right Knee Angles@TakeOff
+
+- parameter: Left Hip Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Left Hip Angles@TakeOff
+
+- parameter: Right Hip Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Right Hip Angles@TakeOff
+
+- parameter: Left Thorax Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Left Thorax Angles@TakeOff
+
+- parameter: Right Thorax Angles@TakeOff_CMJ_L
+  where:
+    name: CMJ_L*
+  steps:
+    - import: Right Thorax Angles@TakeOff
+
+- parameter: Left Knee Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Left Knee Angles@TakeOff
+
+- parameter: Right Knee Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Right Knee Angles@TakeOff
+
+- parameter: Left Hip Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Left Hip Angles@TakeOff
+
+- parameter: Right Hip Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Right Hip Angles@TakeOff
+
+- parameter: Left Thorax Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Left Thorax Angles@TakeOff
+
+- parameter: Right Thorax Angles@TakeOff_CMJ_R
+  where:
+    name: CMJ_R*
+  steps:
+    - import: Right Thorax Angles@TakeOff
+
 # @COM_MIN
 - parameter: Left Ankle Angles@COM_MIN_CMJ_B
   where:
